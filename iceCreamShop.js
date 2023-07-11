@@ -6,7 +6,8 @@ var IcecreamShop;
     let canvas = document.querySelector("#shop");
     crc2 = canvas.getContext("2d");
     function handleload(_event) {
-        drawBackground();
+        // drawBackground();
+        drawOffer();
     }
     function drawBackground() {
         drawOutside();
@@ -103,6 +104,16 @@ var IcecreamShop;
         crc2.fillText("WELCOME", 160, 300);
         crc2.stroke();
         crc2.closePath();
+    }
+    function drawOffer() {
+        let offerdiv = document.querySelector("#offer");
+        let offer = document.querySelector("#canvas2");
+        offer.setAttribute("width", "450");
+        offer.setAttribute("height", "350");
+        offer.setAttribute("border", "solid");
+        offer.setAttribute("visibility", "visible");
+        offer.appendChild(offerdiv);
+        console.log("draw offer");
     }
 })(IcecreamShop || (IcecreamShop = {}));
 //# sourceMappingURL=iceCreamShop.js.map

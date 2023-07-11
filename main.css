@@ -23,3 +23,78 @@ body{
     margin: 50px;
    /* background-color: aliceblue;*/
 }
+
+canvas{
+
+    border: 1px solid #000000;
+}
+
+#offer {
+    position: relative; 
+}
+
+#canvas2{
+    position: absolute;
+    left: 29%;;
+    top: 100px;
+    background-color: rgb(141, 141, 141);
+}
+
+#flavor{
+    position: absolute;
+    left: 29%;
+    top: 55%;
+    width: 300px;
+    height: 30px;
+}
+
+#sauce{
+    position: absolute;
+    left: 29%;
+    top: 60%;
+    width: 448px;
+    height: 30px;
+}
+
+#toppings{
+    position: absolute;
+    left: 29%;
+    top: 65%;
+    width: 448px;
+    height: 30px;
+}
+
+#number{
+    position: absolute;
+    left: 47%;
+    top: 55%;
+    width: 140px;
+    height: 30px;
+}
+
+#but1{
+    background-color: aliceblue;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    position: absolute;
+    border-radius: 25px;
+    left: 490px;
+    top: 70%;
+    width: 150px;
+    height: 60px;
+}
+
+#but2{
+    background-color: aliceblue;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    position: absolute;
+    border-radius: 25px;
+    left: 790px;
+    top: 70%;
+    width: 150px;
+    height: 60px;
+}
+

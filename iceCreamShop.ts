@@ -8,7 +8,8 @@ namespace IcecreamShop {
     
 
     function handleload(_event: Event){
-        drawBackground();
+       // drawBackground();
+        drawOffer();
     }
 
     function drawBackground(){
@@ -133,10 +134,14 @@ namespace IcecreamShop {
 
     function drawOffer():void {
 
-      let offer = document.createElement("span");
+      let offerdiv = document.querySelector("#offer");
+      let offer = document.querySelector("#canvas2");
+      offer.setAttribute("width","450");
+      offer.setAttribute("height","350");
+      offer.setAttribute("border", "solid");
       offer.setAttribute("visibility","visible");
-      offer.appendChild(document.querySelector("#offer"));
-
+      offer.appendChild(offerdiv);
+        console.log("draw offer");
 
     }
 
