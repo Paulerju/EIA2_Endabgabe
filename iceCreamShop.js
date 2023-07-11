@@ -6,7 +6,7 @@ var IcecreamShop;
     let canvas = document.querySelector("#shop");
     crc2 = canvas.getContext("2d");
     function handleload(_event) {
-        // drawBackground();
+        drawBackground();
         drawOffer();
     }
     function drawBackground() {
@@ -106,12 +106,17 @@ var IcecreamShop;
         crc2.closePath();
     }
     function drawOffer() {
+        crc2.fillStyle = "rgba(210, 210, 210, 0.5)";
+        crc2.fillRect(0, 0, canvas.width, canvas.height);
+        crc2.fillStyle = "#4696c2";
+        crc2.fillRect(390, 20, 550, 700);
         let offerdiv = document.querySelector("#offer");
         let offer = document.querySelector("#canvas2");
         offer.setAttribute("width", "450");
         offer.setAttribute("height", "350");
         offer.setAttribute("border", "solid");
         offer.setAttribute("visibility", "visible");
+        offerdiv.setAttribute("visibility", "visible");
         offer.appendChild(offerdiv);
         console.log("draw offer");
     }
