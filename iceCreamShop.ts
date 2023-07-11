@@ -131,4 +131,13 @@ namespace IcecreamShop {
 
     }
 
+    function drawOffer():void {
+
+      let offer = document.createElement("span");
+      offer.setAttribute("visibility","visible");
+      offer.appendChild(document.querySelector("#offer"));
+
+
+    }
+
 }
