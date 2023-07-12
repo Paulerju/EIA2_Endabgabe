@@ -7,15 +7,16 @@ var IcecreamShop;
     let newS = new IcecreamShop.Serveri("anna");
     let newC = new IcecreamShop.customer;
     let newOffer = new IcecreamShop.offer;
-    IcecreamShop.flavorValue = document.getElementById('flavor').value;
-    IcecreamShop.flavor = document.querySelector("flavor");
-    IcecreamShop.flavor.addEventListener("change", newOffer.flavorchange); //listen to flavor (select/option) change
+    /*  export let flavorValue = (<HTMLSelectElement>document.getElementById('flavor')).value;
+      export let flavor = document.querySelector("flavor");
+           flavor.addEventListener("change", newOffer.flavorchange); //listen to flavor (select/option) change */
     function handleload(_event) {
         drawBackground();
         newS.drawServeri();
         newC.unhappy();
         newOffer.drawOffer();
-        console.log(IcecreamShop.flavor);
+        newOffer.flavorchange();
+        //  console.log(flavor);
     }
     ;
     function drawBackground() {

@@ -9,16 +9,17 @@ namespace IcecreamShop {
     let newC: customer = new customer; 
     let newOffer: offer = new offer;
 
-   export let flavorValue = (<HTMLSelectElement>document.getElementById('flavor')).value;
+ /*  export let flavorValue = (<HTMLSelectElement>document.getElementById('flavor')).value;
    export let flavor = document.querySelector("flavor");
-        flavor.addEventListener("change", newOffer.flavorchange); //listen to flavor (select/option) change
+        flavor.addEventListener("change", newOffer.flavorchange); //listen to flavor (select/option) change */
 
     function handleload(_event: Event):void{
        drawBackground();
        newS.drawServeri();
        newC.unhappy();
        newOffer.drawOffer();
-       console.log(flavor);
+       newOffer.flavorchange();
+     //  console.log(flavor);
        
     };
 
