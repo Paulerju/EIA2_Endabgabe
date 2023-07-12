@@ -2,20 +2,25 @@ namespace IcecreamShop {
 
     window.addEventListener("load", handleload);
     console.log("handleLoad working");
-    let crc2: CanvasRenderingContext2D; 
-    let canvas: HTMLCanvasElement = document.querySelector("#shop")!;
+  export  let crc2: CanvasRenderingContext2D; 
+  export  let canvas: HTMLCanvasElement = document.querySelector("#shop")!;
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
     
 
     function handleload(_event: Event){
         drawBackground();
       //  drawOffer();
+        server();
     }
 
     function drawBackground(){
         drawOutside();
         drawRestaurant();
         drawTable();
+    }
+
+    function server(){
+        Server.drawServer();
     }
 
     function drawOutside():void {
@@ -76,12 +81,12 @@ namespace IcecreamShop {
         crc2.beginPath(); //Table bottom right
         crc2.arc(1170, 600, 50, 0, 2 * Math.PI);
         crc2.arc(1060, 600, 32, 0, 2 * Math.PI);
-        crc2.arc(1280, 600, 32, 0, 2 * Math.PI);       
+        crc2.arc(1280, 600, 32, 0, 2 * Math.PI);   
         crc2.fill();
         crc2.closePath();
         crc2.beginPath();
         crc2.arc(1170, 700, 32, 0, 2 * Math.PI);
-        crc2.fill();
+        crc2.fill();        
 
         crc2.beginPath(); //Table bottom left
         crc2.arc(770, 600, 50, 0, 2 * Math.PI);
