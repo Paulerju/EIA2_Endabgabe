@@ -6,11 +6,16 @@ var IcecreamShop;
     IcecreamShop.crc2 = IcecreamShop.canvas.getContext("2d");
     let newS = new IcecreamShop.Serveri("anna");
     let newC = new IcecreamShop.customer;
+    let newOffer = new IcecreamShop.offer;
+    IcecreamShop.flavorValue = document.getElementById('flavor').value;
+    IcecreamShop.flavor = document.querySelector("flavor");
+    IcecreamShop.flavor.addEventListener("change", newOffer.flavorchange); //listen to flavor (select/option) change
     function handleload(_event) {
         drawBackground();
-        // drawOffer();
         newS.drawServeri();
         newC.unhappy();
+        newOffer.drawOffer();
+        console.log(IcecreamShop.flavor);
     }
     ;
     function drawBackground() {
@@ -110,15 +115,6 @@ var IcecreamShop;
         IcecreamShop.crc2.fillText("WELCOME", 160, 300);
         IcecreamShop.crc2.stroke();
         IcecreamShop.crc2.closePath();
-    }
-    function drawOffer() {
-        IcecreamShop.crc2.fillStyle = "rgba(210, 210, 210, 0.5)";
-        IcecreamShop.crc2.fillRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
-        IcecreamShop.crc2.fillStyle = "#4696c2";
-        IcecreamShop.crc2.fillRect(390, 20, 550, 700);
-        let wrapper = document.querySelector("#wrapper");
-        wrapper.classList.remove("hidden");
-        console.log("draw offer");
     }
 })(IcecreamShop || (IcecreamShop = {}));
 //# sourceMappingURL=iceCreamShop.js.map

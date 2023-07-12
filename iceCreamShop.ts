@@ -7,13 +7,19 @@ namespace IcecreamShop {
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
     let newS: Serveri = new Serveri("anna"); 
     let newC: customer = new customer; 
-      
+    let newOffer: offer = new offer;
+
+   export let flavorValue = (<HTMLSelectElement>document.getElementById('flavor')).value;
+   export let flavor = document.querySelector("flavor");
+        flavor.addEventListener("change", newOffer.flavorchange); //listen to flavor (select/option) change
 
     function handleload(_event: Event):void{
        drawBackground();
-      // drawOffer();
        newS.drawServeri();
        newC.unhappy();
+       newOffer.drawOffer();
+       console.log(flavor);
+       
     };
 
     function drawBackground(){
@@ -133,22 +139,6 @@ namespace IcecreamShop {
         crc2.stroke();
         crc2.closePath();
 
-
-    }
-
-    function drawOffer():void {
-
-     crc2.fillStyle = "rgba(210, 210, 210, 0.5)";
-     crc2.fillRect(0,0,canvas.width,canvas.height);
-
-     crc2.fillStyle ="#4696c2";
-     crc2.fillRect(390,20, 550,700);
-
-    let wrapper = document.querySelector("#wrapper");
-     wrapper.classList.remove("hidden");
-
-        console.log("draw offer");
-    
 
     }
 
