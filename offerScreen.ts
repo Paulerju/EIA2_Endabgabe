@@ -12,7 +12,7 @@ namespace IcecreamShop {
        
            let wrapper = document.querySelector("#wrapper");
             wrapper.classList.remove("hidden");
-       
+            this.flavorchange();
                console.log("draw offer");
            
            }
@@ -50,7 +50,7 @@ namespace IcecreamShop {
             crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
             crc2.beginPath();
-            crc2.fillStyle ="white";
+            crc2.fillStyle ="#ebf2ff";
             crc2.arc(220, 320, 45, 1* Math.PI, 2 * Math.PI); 
             crc2.fill();
             crc2.closePath();

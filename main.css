@@ -39,7 +39,7 @@ canvas{
 
 #canvas2{
     position: absolute;
-    left: 29%;;
+    left: 500px;;
     top: 150px;
     background-color: rgb(141, 141, 141);
    
@@ -47,7 +47,7 @@ canvas{
 
 #flavor{
     position: absolute;
-    left: 29%;
+    left: 500px;
     top: 60%;
     width: 300px;
     height: 30px;
@@ -56,7 +56,7 @@ canvas{
 
 #sauce{
     position: absolute;
-    left: 29%;
+    left: 500px;
     top: 65%;
     width: 448px;
     height: 30px;
@@ -65,7 +65,7 @@ canvas{
 
 #toppings{
     position: absolute;
-    left: 29%;
+    left: 500px;
     top: 70%;
     width: 448px;
     height: 30px;
@@ -74,7 +74,7 @@ canvas{
 
 #number{
     position: absolute;
-    left: 47%;
+    left: 808px;
     top: 60%;
     width: 140px;
     height: 30px;
@@ -112,7 +112,7 @@ canvas{
 
 h1{
     position: absolute;
-    left: 35%;
+    left: 600px;
     top: 75px;
     color: aliceblue;
     

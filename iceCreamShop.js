@@ -13,10 +13,9 @@ var IcecreamShop;
     function handleload(_event) {
         drawBackground();
         newS.drawServeri();
-        newC.unhappy();
-        newOffer.drawOffer();
-        newOffer.flavorchange();
-        //  console.log(flavor);
+        newC.drawCustomer();
+        // newOffer.drawOffer();
+        // newOffer.flavorchange();
     }
     ;
     function drawBackground() {

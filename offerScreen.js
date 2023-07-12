@@ -8,6 +8,7 @@ var IcecreamShop;
             IcecreamShop.crc2.fillRect(390, 20, 550, 700);
             let wrapper = document.querySelector("#wrapper");
             wrapper.classList.remove("hidden");
+            this.flavorchange();
             console.log("draw offer");
         }
         flavorchange() {
@@ -36,7 +37,7 @@ var IcecreamShop;
             let canvas = document.querySelector("#canvas2");
             crc2 = canvas.getContext("2d");
             crc2.beginPath();
-            crc2.fillStyle = "white";
+            crc2.fillStyle = "#ebf2ff";
             crc2.arc(220, 320, 45, 1 * Math.PI, 2 * Math.PI);
             crc2.fill();
             crc2.closePath();

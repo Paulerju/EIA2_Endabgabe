@@ -8,6 +8,7 @@ namespace IcecreamShop {
     let newS: Serveri = new Serveri("anna"); 
     let newC: customer = new customer; 
     let newOffer: offer = new offer;
+    
 
  /*  export let flavorValue = (<HTMLSelectElement>document.getElementById('flavor')).value;
    export let flavor = document.querySelector("flavor");
@@ -16,10 +17,9 @@ namespace IcecreamShop {
     function handleload(_event: Event):void{
        drawBackground();
        newS.drawServeri();
-       newC.unhappy();
-       newOffer.drawOffer();
-       newOffer.flavorchange();
-     //  console.log(flavor);
+       newC.drawCustomer();
+      // newOffer.drawOffer();
+      // newOffer.flavorchange();
        
     };
 
