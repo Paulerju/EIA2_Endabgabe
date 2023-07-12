@@ -4,19 +4,21 @@ var IcecreamShop;
     console.log("handleLoad working");
     IcecreamShop.canvas = document.querySelector("#shop");
     IcecreamShop.crc2 = IcecreamShop.canvas.getContext("2d");
+    let newS = new IcecreamShop.Serveri("anna");
+    let newC = new IcecreamShop.customer;
     function handleload(_event) {
         drawBackground();
-        //  drawOffer();
-        server();
+        // drawOffer();
+        newS.drawServeri();
+        newC.unhappy();
     }
+    ;
     function drawBackground() {
         drawOutside();
         drawRestaurant();
         drawTable();
     }
-    function server() {
-        IcecreamShop.Server.drawServer();
-    }
+    ;
     function drawOutside() {
         IcecreamShop.crc2.fillStyle = "#145c2c";
         IcecreamShop.crc2.fillRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
@@ -25,6 +27,7 @@ var IcecreamShop;
         IcecreamShop.crc2.fillRect(110, 110, 640, 70);
         IcecreamShop.crc2.fillRect(660, 0, 90, 120);
     }
+    ;
     function drawRestaurant() {
         IcecreamShop.crc2.fillStyle = "#878787";
         IcecreamShop.crc2.fillRect(0, 250, 900, 550);

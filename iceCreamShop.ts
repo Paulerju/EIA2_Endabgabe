@@ -5,23 +5,22 @@ namespace IcecreamShop {
   export  let crc2: CanvasRenderingContext2D; 
   export  let canvas: HTMLCanvasElement = document.querySelector("#shop")!;
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-    
+    let newS: Serveri = new Serveri("anna"); 
+    let newC: customer = new customer; 
+      
 
-    function handleload(_event: Event){
-        drawBackground();
-      //  drawOffer();
-        server();
-    }
+    function handleload(_event: Event):void{
+       drawBackground();
+      // drawOffer();
+       newS.drawServeri();
+       newC.unhappy();
+    };
 
     function drawBackground(){
         drawOutside();
         drawRestaurant();
         drawTable();
-    }
-
-    function server(){
-        Server.drawServer();
-    }
+    };
 
     function drawOutside():void {
 
@@ -33,7 +32,7 @@ namespace IcecreamShop {
         crc2.fillRect(110,110,640,70);
         crc2.fillRect(660,0,90,120);
 
-    }
+    };
 
     function drawRestaurant():void {  //canvas is: 1400 width, 800 height
 
