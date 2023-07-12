@@ -4,7 +4,7 @@ var IcecreamShop;
     console.log("handleLoad working");
     IcecreamShop.canvas = document.querySelector("#shop");
     IcecreamShop.crc2 = IcecreamShop.canvas.getContext("2d");
-    let newS = new IcecreamShop.Serveri("anna");
+    let player = new IcecreamShop.Serveri();
     let newC = new IcecreamShop.customer;
     let newOffer = new IcecreamShop.offer;
     /*  export let flavorValue = (<HTMLSelectElement>document.getElementById('flavor')).value;
@@ -12,7 +12,13 @@ var IcecreamShop;
            flavor.addEventListener("change", newOffer.flavorchange); //listen to flavor (select/option) change */
     function handleload(_event) {
         drawBackground();
-        newS.drawServeri();
+        player.drawServeri({ set(_x, _y) {
+            }, x: 400, y: 725 }, {
+            x: 5, y: 6,
+            set: function (_x, _y) {
+                throw new Error("Function not implemented.");
+            }
+        });
         newC.drawCustomer();
         // newOffer.drawOffer();
         // newOffer.flavorchange();
@@ -116,5 +122,22 @@ var IcecreamShop;
         IcecreamShop.crc2.stroke();
         IcecreamShop.crc2.closePath();
     }
+    window.addEventListener("keydown", ({ key }) => {
+        switch (key) {
+            case "w":
+                player.velocity.y = -5;
+                break;
+            case "a":
+                player.velocity.x = -5;
+                break;
+            case "s":
+                player.velocity.y = 5;
+                break;
+            case "d":
+                player.velocity.x = 5;
+                break;
+        }
+        console.log(player.velocity); // not quite working
+    });
 })(IcecreamShop || (IcecreamShop = {}));
 //# sourceMappingURL=iceCreamShop.js.map

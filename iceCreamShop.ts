@@ -5,7 +5,7 @@ namespace IcecreamShop {
   export  let crc2: CanvasRenderingContext2D; 
   export  let canvas: HTMLCanvasElement = document.querySelector("#shop")!;
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-    let newS: Serveri = new Serveri("anna"); 
+    let player: Serveri = new Serveri(); 
     let newC: customer = new customer; 
     let newOffer: offer = new offer;
     
@@ -16,7 +16,15 @@ namespace IcecreamShop {
 
     function handleload(_event: Event):void{
        drawBackground();
-       newS.drawServeri();
+       player.drawServeri({set(_x, _y) {  // something is very wrong here
+        
+       },x: 400, y:725},{
+           x: 5, y: 6,
+           set: function (_x: number, _y: number): void {
+               throw new Error("Function not implemented.");
+           }
+       });
+
        newC.drawCustomer();
       // newOffer.drawOffer();
       // newOffer.flavorchange();
@@ -142,5 +150,23 @@ namespace IcecreamShop {
 
 
     }
+
+    window.addEventListener("keydown",({ key }) =>{
+        switch (key) {
+            case "w": 
+            player.velocity.y = -5
+            break
+            case "a": 
+            player.velocity.x = -5
+            break
+            case "s": 
+            player.velocity.y = 5
+            break
+            case "d": 
+            player.velocity.x = 5
+            break
+        }
+        console.log(player.velocity); // not quite working
+    });
 
 }
