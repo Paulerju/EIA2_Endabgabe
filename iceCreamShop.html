@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IceCreamShop</title>
-    <script src="iceCreamShop.js" defer></script>
     <link rel="stylesheet" href="main.css">
-</head>
+    <script src="iceCreamShop.js" defer></script>
+  </head>
 <body> 
-
+  <div id="offer">
     <canvas id="shop" width="1400" height="800">
     </canvas>
-
-     <div id="offer">
+<div class="hidden" id="wrapper">
 
     <h1>Offer - Selection</h1>
-    <canvas id="canvas2"></canvas>
+    <canvas id="canvas2" width="450" height="350" ></canvas>
    
     <select name="flavor" id="flavor">
         <option value="strawberry">strawberry</option>
@@ -41,8 +40,9 @@
         <option value="three">three</option>
       </select>
 
+      <button id="but1">continue game</button>
       <button id="but2">save Order</button>
-
+    </div>
    </div>
 </body>
 </html>
