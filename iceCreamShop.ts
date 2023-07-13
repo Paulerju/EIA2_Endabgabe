@@ -6,17 +6,17 @@ namespace IcecreamShop {
     export let canvas: HTMLCanvasElement = document.querySelector("#shop")!;
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
-  export let player: Serveri;
+  export  let player: Serveri;
     let newC: customer = new customer();
     let newOffer: offer = new offer();
 
-    function handleload(_event: Event): void {
+   export function handleload(): void {
         drawBackground();
         player = new Serveri();
         player.drawServeri();
 
         newC.drawCustomer();
-        newOffer.drawOffer();
+       // newOffer.drawOffer();
         // newOffer.flavorchange();
         newOffer.addEventListeners();
 
@@ -25,13 +25,13 @@ namespace IcecreamShop {
         window.addEventListener("keyup", handleKeyUp);
     }
 
-    function drawBackground(): void {
+  export function drawBackground(): void {
         drawOutside();
         drawRestaurant();
         drawTable();
     }
 
-    function drawOutside(): void {
+ export function drawOutside(): void {
         crc2.fillStyle = "#145c2c";
         crc2.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -41,7 +41,7 @@ namespace IcecreamShop {
         crc2.fillRect(660, 0, 90, 120);
     }
 
-    function drawRestaurant(): void {
+    export function drawRestaurant(): void {
         crc2.fillStyle = "#878787";
         crc2.fillRect(0, 250, 900, 550);
         crc2.fillRect(850, 0, 700, 800);
@@ -68,7 +68,7 @@ namespace IcecreamShop {
         crc2.fill();
     }
 
-    function drawTable(): void {
+    export function drawTable(): void {
         crc2.fillStyle = "#4696c2";
         crc2.fillRect(10, 580, 500, 80);
 

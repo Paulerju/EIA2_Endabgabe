@@ -6,23 +6,25 @@ var IcecreamShop;
     IcecreamShop.crc2 = IcecreamShop.canvas.getContext("2d");
     let newC = new IcecreamShop.customer();
     let newOffer = new IcecreamShop.offer();
-    function handleload(_event) {
+    function handleload() {
         drawBackground();
         IcecreamShop.player = new IcecreamShop.Serveri();
         IcecreamShop.player.drawServeri();
         newC.drawCustomer();
-        newOffer.drawOffer();
+        // newOffer.drawOffer();
         // newOffer.flavorchange();
         newOffer.addEventListeners();
         // Add event listeners for keydown and keyup events
         window.addEventListener("keydown", handleKeyDown);
         window.addEventListener("keyup", handleKeyUp);
     }
+    IcecreamShop.handleload = handleload;
     function drawBackground() {
         drawOutside();
         drawRestaurant();
         drawTable();
     }
+    IcecreamShop.drawBackground = drawBackground;
     function drawOutside() {
         IcecreamShop.crc2.fillStyle = "#145c2c";
         IcecreamShop.crc2.fillRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
@@ -31,6 +33,7 @@ var IcecreamShop;
         IcecreamShop.crc2.fillRect(110, 110, 640, 70);
         IcecreamShop.crc2.fillRect(660, 0, 90, 120);
     }
+    IcecreamShop.drawOutside = drawOutside;
     function drawRestaurant() {
         IcecreamShop.crc2.fillStyle = "#878787";
         IcecreamShop.crc2.fillRect(0, 250, 900, 550);
@@ -55,6 +58,7 @@ var IcecreamShop;
         IcecreamShop.crc2.fillRect(317, 197, 160, 6);
         IcecreamShop.crc2.fill();
     }
+    IcecreamShop.drawRestaurant = drawRestaurant;
     function drawTable() {
         IcecreamShop.crc2.fillStyle = "#4696c2";
         IcecreamShop.crc2.fillRect(10, 580, 500, 80);
@@ -114,6 +118,7 @@ var IcecreamShop;
         IcecreamShop.crc2.stroke();
         IcecreamShop.crc2.closePath();
     }
+    IcecreamShop.drawTable = drawTable;
     function handleKeyDown(event) {
         switch (event.key) {
             case "w":

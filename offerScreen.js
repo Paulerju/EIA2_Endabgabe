@@ -72,21 +72,26 @@ var IcecreamShop;
             let selectedtoppping = toppingSelect.value;
             switch (selectedtoppping) {
                 case "sprinkles":
+                    this.flavorchange();
+                    this.saucechange();
                     this.drawsprinkles();
                     this.bowl();
                     break;
                 case "smarties":
-                    this.drawsmarties();
+                    this.flavorchange();
+                    this.saucechange();
                     this.bowl();
+                    this.drawsmarties();
                     break;
                 case "nothing":
-                    this.saucechange();
                     this.flavorchange();
+                    this.saucechange();
                     this.bowl();
                     break;
                 default:
                     break;
             }
+            IcecreamShop.player.update();
         }
         bowl() {
             let crc2;
@@ -211,40 +216,58 @@ var IcecreamShop;
             let crc2;
             let canvas = document.querySelector("#canvas2");
             crc2 = canvas.getContext("2d");
+            crc2.beginPath();
             crc2.fillStyle = "#8a032b";
-            crc2.ellipse(-40, -200, 8, 2, 3, 0, 4);
-            crc2.ellipse(-80, -230, 8, 2, 3, 0, 4);
-            crc2.ellipse(-40, -230, 8, 2, 3, 0, 4);
+            crc2.ellipse(200, 80, 8, 2, 3, 0, 20);
+            crc2.ellipse(240, 130, 8, 2, 3, 0, 20);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
+            crc2.ellipse(210, 110, 8, 2, 3, 0, 20);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
             crc2.fillStyle = "#166e2a";
-            crc2.ellipse(-100, -310, 8, 2, 3, 0, 4);
-            crc2.ellipse(-120, -210, 8, 2, 3, 0, 4);
-            crc2.ellipse(-105, -245, 8, 2, 3, 0, 4);
+            crc2.ellipse(200, 110, 8, 2, 3, 0, 20);
+            crc2.ellipse(220, 90, 8, 2, 3, 0, 20);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
+            crc2.ellipse(265, 145, 8, 2, 3, 0, 20);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
             crc2.fillStyle = "#223b8c";
-            crc2.ellipse(-30, -240, 8, 2, 3, 0, 4);
-            crc2.ellipse(-120, -320, 8, 2, 3, 0, 4);
-            crc2.ellipse(-130, -220, 8, 2, 3, 0, 4);
+            crc2.ellipse(140, 140, 8, 2, 3, 0, 20);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
+            crc2.ellipse(280, 120, 8, 2, 3, 0, 20);
+            crc2.ellipse(230, 120, 8, 2, 3, 0, 20);
+            crc2.fill();
         }
         addEventListeners() {
             const flavorSelect = document.querySelector("#flavor");
             flavorSelect.addEventListener("change", () => {
                 this.flavorchange();
-                IcecreamShop.player.update();
-            }); //Event listener Offer Flavor
+            });
             const sauceSelect = document.querySelector("#sauce");
             sauceSelect.addEventListener("change", () => {
                 this.saucechange();
-                IcecreamShop.player.update();
-            }); //Event listener Offer Sauce
+                this.toppingchange();
+            });
             const toppingSelect = document.querySelector("#toppings");
             toppingSelect.addEventListener("change", () => {
                 this.toppingchange();
-                IcecreamShop.player.update();
-            }); //Event listener Offer Toppings
-            const numberSelect = document.querySelector("#number");
-            numberSelect.addEventListener("change", () => {
-                //  this.numberchange();
-                IcecreamShop.player.update();
-            }); //Event listener Offer Amount
+            });
+            IcecreamShop.player.update(); //Event listener Offer Toppings
+            let button1 = document.querySelector("#but2");
+            button1.addEventListener("click", () => {
+                let wrapper = document.querySelector("#wrapper");
+                wrapper.classList.add("hidden");
+                IcecreamShop.crc2.clearRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
+                IcecreamShop.handleload();
+            });
         }
         ;
     }

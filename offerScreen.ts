@@ -78,7 +78,7 @@ namespace IcecreamShop {
             }
           }
 
-          toppingchange(): void {
+          toppingchange(): void {  // Hängt sich auf, wenn streusel ausgewählt werden??
             let crc2: CanvasRenderingContext2D;
             let canvas: HTMLCanvasElement = document.querySelector("#canvas2")!;
             crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
@@ -88,21 +88,25 @@ namespace IcecreamShop {
             
             switch (selectedtoppping) {
               case "sprinkles":
+                this.flavorchange();
+                this.saucechange();
                 this.drawsprinkles();
                 this.bowl();
                 break;
               case "smarties":
+                this.flavorchange();
+                this.saucechange(); 
+                this.bowl();               
                 this.drawsmarties();
-                this.bowl();
                 break;
                 case "nothing":
-                    this.saucechange();
                     this.flavorchange();
+                    this.saucechange();
                     this.bowl();
                     break;
               default:
                 break;
-            }
+            } player.update();
           }
           
 
@@ -243,45 +247,66 @@ namespace IcecreamShop {
             let canvas: HTMLCanvasElement = document.querySelector("#canvas2")!;
             crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
+            crc2.beginPath();
             crc2.fillStyle = "#8a032b";
-            crc2.ellipse(-40, -200, 8, 2, 3, 0, 4);
-            crc2.ellipse(-80, -230, 8, 2, 3, 0, 4);
-            crc2.ellipse(-40, -230, 8, 2, 3, 0, 4);
+            crc2.ellipse(200,80, 8, 2, 3, 0, 20);
+            crc2.ellipse(240, 130, 8, 2, 3, 0, 20);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
+            crc2.ellipse(210, 110, 8, 2, 3, 0, 20);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
             crc2.fillStyle = "#166e2a";
-            crc2.ellipse(-100, -310, 8, 2, 3, 0, 4);
-            crc2.ellipse(-120, -210, 8, 2, 3, 0, 4);
-            crc2.ellipse(-105, -245, 8, 2, 3, 0, 4);
+            crc2.ellipse(200, 110, 8, 2, 3, 0, 20);
+            crc2.ellipse(220, 90, 8, 2, 3, 0, 20);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();     
+            crc2.ellipse(265, 145, 8, 2, 3, 0, 20);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath(); 
             crc2.fillStyle = "#223b8c";
-            crc2.ellipse(-30, -240, 8, 2, 3, 0, 4);
-            crc2.ellipse(-120, -320, 8, 2, 3, 0, 4);
-            crc2.ellipse(-130, -220, 8, 2, 3, 0, 4);
-
+            crc2.ellipse(140, 140, 8, 2, 3, 0, 20);
+            crc2.fill()
+            crc2.closePath();
+            crc2.beginPath(); 
+            crc2.ellipse(280, 120, 8, 2, 3, 0, 20);
+            crc2.ellipse(230, 120, 8, 2, 3, 0, 20);
+            crc2.fill();
 
 
         }
 
         addEventListeners(): void {
-            const flavorSelect = document.querySelector("#flavor") as HTMLSelectElement; flavorSelect.addEventListener("change", () => {
-                this.flavorchange();
-                player.update();
-            });//Event listener Offer Flavor
+            const flavorSelect = document.querySelector("#flavor") as HTMLSelectElement;
+            flavorSelect.addEventListener("change", () => {
+              this.flavorchange();
+            });
+          
+            const sauceSelect = document.querySelector("#sauce") as HTMLSelectElement;
+            sauceSelect.addEventListener("change", () => {
+              this.saucechange();
+              this.toppingchange();
+            });
+          
+            const toppingSelect = document.querySelector("#toppings") as HTMLSelectElement;
+            toppingSelect.addEventListener("change", () => {
+              this.toppingchange();
+            }); 
+          
+            player.update();//Event listener Offer Toppings
 
-            const sauceSelect = document.querySelector("#sauce") as HTMLSelectElement; sauceSelect.addEventListener("change", () => {
-                this.saucechange();
-                player.update();
-            });//Event listener Offer Sauce
-
-            const toppingSelect = document.querySelector("#toppings") as HTMLSelectElement; toppingSelect.addEventListener("change", () => {
-               this.toppingchange();
-                player.update();
-            });//Event listener Offer Toppings
-
-            const numberSelect = document.querySelector("#number") as HTMLSelectElement; numberSelect.addEventListener("change", () => {
-              //  this.numberchange();
-                player.update();
-            });//Event listener Offer Amount
+            let button1 = document.querySelector("#but2");
+            button1.addEventListener("click",() => {
+                let wrapper = document.querySelector("#wrapper");
+            wrapper.classList.add("hidden");
+            crc2.clearRect(0,0,canvas.width,canvas.height);
+                handleload();
+              }); 
         };  
-
         
 
     }
