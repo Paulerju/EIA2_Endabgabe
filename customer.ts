@@ -1,13 +1,13 @@
 namespace IcecreamShop {
 
   export class customer {
-    
-          private x: number;
-          private y: number;
-          private radius: number;
-          private color: string;
-          private destination: Seat | null;
-          private path: Path2D | null;
+
+           x: number;
+           y: number;
+           radius: number;
+           color: string;
+           destination: Seat | null;
+           path: Path2D | null;
       
           constructor(x: number, y: number, radius: number, color: string) {
             this.x = x;

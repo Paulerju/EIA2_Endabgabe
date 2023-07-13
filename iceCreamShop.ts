@@ -7,7 +7,7 @@ namespace IcecreamShop {
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
   export  let player: Serveri;
-    let newC: customer = new customer();
+    let newC: customer = new customer(100,100,10,"blue");
     let newOffer: offer = new offer();
 
    export function handleload(): void {
@@ -139,7 +139,6 @@ namespace IcecreamShop {
         crc2.closePath();
     }
 
-    namespace IcecreamShop {
         export class Seat {
           private x: number;
           private y: number;
@@ -184,7 +183,6 @@ namespace IcecreamShop {
           getY(): number {
             return this.y;
           }
-        }
       }
       
 
