@@ -9,28 +9,84 @@ var IcecreamShop;
             let wrapper = document.querySelector("#wrapper");
             wrapper.classList.remove("hidden");
             this.flavorchange();
+            this.saucechange();
+            this.toppingchange();
             console.log("draw offer");
         }
         flavorchange() {
-            console.log("flavor change");
-            /*  if(flavorValue == "strawberry" ){
-              this.drawIcecream("#871326","#800f22");
-              this.bowl();
-              }
-  
-              if(flavorValue == "lemon" ){
-              this.drawIcecream("#e8e7d5","#e3e2cc");
-              this.bowl();
-              }
-              
-               if(flavorValue == "raspberry" ){
-              this.drawIcecream("#d13d71","#d94176");
-              this.bowl();
-              }      */
-            //strawberry: 
-            this.drawIcecream("#d13d71", "#d94176");
-            this.bowl();
-            this.drawsmarties();
+            let crc2;
+            let canvas = document.querySelector("#canvas2");
+            crc2 = canvas.getContext("2d");
+            crc2.clearRect(0, 0, canvas.width, canvas.height);
+            let flavorSelect = document.querySelector("#flavor");
+            let selectedFlavor = flavorSelect.value;
+            switch (selectedFlavor) {
+                case "strawberry":
+                    this.drawIcecream("#871326", "#800f22");
+                    this.bowl();
+                    break;
+                case "lemon":
+                    this.drawIcecream("#e8e7d5", "#e3e2cc");
+                    this.bowl();
+                    break;
+                case "raspberry":
+                    this.drawIcecream("#d13d71", "#d94176");
+                    this.bowl();
+                    break;
+                default:
+                    break;
+            }
+        }
+        saucechange() {
+            let crc2;
+            let canvas = document.querySelector("#canvas2");
+            crc2 = canvas.getContext("2d");
+            crc2.clearRect(0, 0, canvas.width, canvas.height);
+            let sauceSelect = document.querySelector("#sauce");
+            let selectedSauce = sauceSelect.value;
+            switch (selectedSauce) {
+                case "chocolate":
+                    this.flavorchange();
+                    this.drawsauce("#1f0006"); // Draw the sauce
+                    this.bowl();
+                    break;
+                case "strawberry":
+                    this.flavorchange();
+                    this.drawsauce("#701225"); // Draw the sauce
+                    this.bowl();
+                    break;
+                case "white chocolate":
+                    this.flavorchange();
+                    this.drawsauce("#fff0d9"); // Draw the sauce
+                    this.bowl();
+                    break;
+                default:
+                    break;
+            }
+        }
+        toppingchange() {
+            let crc2;
+            let canvas = document.querySelector("#canvas2");
+            crc2 = canvas.getContext("2d");
+            let toppingSelect = document.querySelector("#toppings");
+            let selectedtoppping = toppingSelect.value;
+            switch (selectedtoppping) {
+                case "sprinkles":
+                    this.drawsprinkles();
+                    this.bowl();
+                    break;
+                case "smarties":
+                    this.drawsmarties();
+                    this.bowl();
+                    break;
+                case "nothing":
+                    this.saucechange();
+                    this.flavorchange();
+                    this.bowl();
+                    break;
+                default:
+                    break;
+            }
         }
         bowl() {
             let crc2;
@@ -66,6 +122,46 @@ var IcecreamShop;
             crc2.fill();
             crc2.closePath();
         }
+        drawsauce(_flavor) {
+            let crc2;
+            let canvas = document.querySelector("#canvas2");
+            crc2 = canvas.getContext("2d");
+            crc2.beginPath();
+            crc2.fillStyle = _flavor;
+            crc2.moveTo(370, 100);
+            crc2.arc(220, 100, 50, 1 * Math.PI, 2 * Math.PI);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
+            crc2.arc(186, 110, 20, 0 * Math.PI, 2 * Math.PI);
+            crc2.arc(170, 120, 20, 0 * Math.PI, 2 * Math.PI);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
+            crc2.arc(170, 140, 15, 0 * Math.PI, 2 * Math.PI);
+            crc2.arc(170, 160, 10, 0 * Math.PI, 2 * Math.PI);
+            crc2.fill();
+            crc2.beginPath();
+            crc2.arc(253, 110, 20, 0 * Math.PI, 2 * Math.PI);
+            crc2.arc(270, 120, 20, 0 * Math.PI, 2 * Math.PI);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
+            crc2.arc(290, 135, 16, 0 * Math.PI, 2 * Math.PI);
+            crc2.arc(295, 150, 14, 0 * Math.PI, 2 * Math.PI);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
+            crc2.arc(220, 110, 20, 0 * Math.PI, 2 * Math.PI);
+            crc2.arc(225, 125, 16, 0 * Math.PI, 2 * Math.PI);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
+            crc2.arc(250, 155, 12, 0 * Math.PI, 2 * Math.PI);
+            crc2.arc(240, 140, 16, 0 * Math.PI, 2 * Math.PI);
+            crc2.fill();
+            crc2.closePath();
+        }
         drawsprinkles() {
             let crc2;
             let canvas = document.querySelector("#canvas2");
@@ -81,6 +177,8 @@ var IcecreamShop;
             crc2.fillRect(280, -75, 8, 2);
             crc2.fillRect(210, -80, 8, 2);
             crc2.fillRect(190, -60, 8, 2);
+            crc2.closePath();
+            crc2.beginPath();
             crc2.rotate((44 * Math.PI) / 180);
             crc2.fillStyle = "#166e2a";
             crc2.fillRect(150, -250, 8, 2);
@@ -92,6 +190,8 @@ var IcecreamShop;
             crc2.fillRect(150, -230, 8, 2);
             crc2.fillRect(130, -270, 8, 2);
             crc2.fillRect(130, -190, 8, 2);
+            crc2.closePath();
+            crc2.beginPath();
             crc2.rotate((46 * Math.PI) / 180);
             crc2.fillStyle = "#8a032b";
             crc2.fillRect(-40, -200, 8, 2);
@@ -104,21 +204,49 @@ var IcecreamShop;
             crc2.fillRect(-120, -320, 8, 2);
             crc2.fillRect(-130, -220, 8, 2);
             crc2.stroke();
+            crc2.closePath();
+            crc2.rotate(0);
         }
         drawsmarties() {
             let crc2;
             let canvas = document.querySelector("#canvas2");
             crc2 = canvas.getContext("2d");
+            crc2.fillStyle = "#8a032b";
             crc2.ellipse(-40, -200, 8, 2, 3, 0, 4);
             crc2.ellipse(-80, -230, 8, 2, 3, 0, 4);
             crc2.ellipse(-40, -230, 8, 2, 3, 0, 4);
+            crc2.fillStyle = "#166e2a";
             crc2.ellipse(-100, -310, 8, 2, 3, 0, 4);
             crc2.ellipse(-120, -210, 8, 2, 3, 0, 4);
             crc2.ellipse(-105, -245, 8, 2, 3, 0, 4);
+            crc2.fillStyle = "#223b8c";
             crc2.ellipse(-30, -240, 8, 2, 3, 0, 4);
             crc2.ellipse(-120, -320, 8, 2, 3, 0, 4);
             crc2.ellipse(-130, -220, 8, 2, 3, 0, 4);
         }
+        addEventListeners() {
+            const flavorSelect = document.querySelector("#flavor");
+            flavorSelect.addEventListener("change", () => {
+                this.flavorchange();
+                IcecreamShop.player.update();
+            }); //Event listener Offer Flavor
+            const sauceSelect = document.querySelector("#sauce");
+            sauceSelect.addEventListener("change", () => {
+                this.saucechange();
+                IcecreamShop.player.update();
+            }); //Event listener Offer Sauce
+            const toppingSelect = document.querySelector("#toppings");
+            toppingSelect.addEventListener("change", () => {
+                this.toppingchange();
+                IcecreamShop.player.update();
+            }); //Event listener Offer Toppings
+            const numberSelect = document.querySelector("#number");
+            numberSelect.addEventListener("change", () => {
+                //  this.numberchange();
+                IcecreamShop.player.update();
+            }); //Event listener Offer Amount
+        }
+        ;
     }
     IcecreamShop.offer = offer;
 })(IcecreamShop || (IcecreamShop = {}));

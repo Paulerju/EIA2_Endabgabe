@@ -4,16 +4,16 @@ var IcecreamShop;
     console.log("handleLoad working");
     IcecreamShop.canvas = document.querySelector("#shop");
     IcecreamShop.crc2 = IcecreamShop.canvas.getContext("2d");
-    let player;
     let newC = new IcecreamShop.customer();
     let newOffer = new IcecreamShop.offer();
     function handleload(_event) {
         drawBackground();
-        player = new IcecreamShop.Serveri();
-        player.drawServeri();
+        IcecreamShop.player = new IcecreamShop.Serveri();
+        IcecreamShop.player.drawServeri();
         newC.drawCustomer();
-        // newOffer.drawOffer();
+        newOffer.drawOffer();
         // newOffer.flavorchange();
+        newOffer.addEventListeners();
         // Add event listeners for keydown and keyup events
         window.addEventListener("keydown", handleKeyDown);
         window.addEventListener("keyup", handleKeyUp);
@@ -117,32 +117,32 @@ var IcecreamShop;
     function handleKeyDown(event) {
         switch (event.key) {
             case "w":
-                player.velocity.y = -5;
+                IcecreamShop.player.velocity.y = -5;
                 break;
             case "a":
-                player.velocity.x = -5;
+                IcecreamShop.player.velocity.x = -5;
                 break;
             case "s":
-                player.velocity.y = 5;
+                IcecreamShop.player.velocity.y = 5;
                 break;
             case "d":
-                player.velocity.x = 5;
+                IcecreamShop.player.velocity.x = 5;
                 break;
         }
-        console.log(player.velocity);
+        console.log(IcecreamShop.player.velocity);
     }
     function handleKeyUp(event) {
         switch (event.key) {
             case "w":
             case "s":
-                player.velocity.y = 0;
+                IcecreamShop.player.velocity.y = 0;
                 break;
             case "a":
             case "d":
-                player.velocity.x = 0;
+                IcecreamShop.player.velocity.x = 0;
                 break;
         }
-        console.log(player.velocity);
+        console.log(IcecreamShop.player.velocity);
     }
 })(IcecreamShop || (IcecreamShop = {}));
 //# sourceMappingURL=iceCreamShop.js.map

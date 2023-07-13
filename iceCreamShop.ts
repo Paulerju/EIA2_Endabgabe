@@ -6,7 +6,7 @@ namespace IcecreamShop {
     export let canvas: HTMLCanvasElement = document.querySelector("#shop")!;
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
-    let player: Serveri;
+  export let player: Serveri;
     let newC: customer = new customer();
     let newOffer: offer = new offer();
 
@@ -16,8 +16,9 @@ namespace IcecreamShop {
         player.drawServeri();
 
         newC.drawCustomer();
-        // newOffer.drawOffer();
+        newOffer.drawOffer();
         // newOffer.flavorchange();
+        newOffer.addEventListeners();
 
         // Add event listeners for keydown and keyup events
         window.addEventListener("keydown", handleKeyDown);
