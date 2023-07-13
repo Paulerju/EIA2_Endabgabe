@@ -7,7 +7,7 @@ namespace IcecreamShop {
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
   export  let player: Serveri;
-    let newC: customer = new customer(100,100,10,"blue");
+    let newC: customer = new customer(200,180,40,"#b56cd4");
     let newOffer: offer = new offer();
 
    export function handleload(): void {

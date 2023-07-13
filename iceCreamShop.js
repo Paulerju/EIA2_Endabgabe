@@ -4,7 +4,7 @@ var IcecreamShop;
     console.log("handleLoad working");
     IcecreamShop.canvas = document.querySelector("#shop");
     IcecreamShop.crc2 = IcecreamShop.canvas.getContext("2d");
-    let newC = new IcecreamShop.customer(100, 100, 10, "blue");
+    let newC = new IcecreamShop.customer(200, 180, 40, "#b56cd4");
     let newOffer = new IcecreamShop.offer();
     function handleload() {
         drawBackground();
