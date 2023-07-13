@@ -4,32 +4,25 @@ var IcecreamShop;
     console.log("handleLoad working");
     IcecreamShop.canvas = document.querySelector("#shop");
     IcecreamShop.crc2 = IcecreamShop.canvas.getContext("2d");
-    let player = new IcecreamShop.Serveri();
-    let newC = new IcecreamShop.customer;
-    let newOffer = new IcecreamShop.offer;
-    /*  export let flavorValue = (<HTMLSelectElement>document.getElementById('flavor')).value;
-      export let flavor = document.querySelector("flavor");
-           flavor.addEventListener("change", newOffer.flavorchange); //listen to flavor (select/option) change */
+    let player;
+    let newC = new IcecreamShop.customer();
+    let newOffer = new IcecreamShop.offer();
     function handleload(_event) {
         drawBackground();
-        player.drawServeri({ set(_x, _y) {
-            }, x: 400, y: 725 }, {
-            x: 5, y: 6,
-            set: function (_x, _y) {
-                throw new Error("Function not implemented.");
-            }
-        });
+        player = new IcecreamShop.Serveri();
+        player.drawServeri();
         newC.drawCustomer();
         // newOffer.drawOffer();
         // newOffer.flavorchange();
+        // Add event listeners for keydown and keyup events
+        window.addEventListener("keydown", handleKeyDown);
+        window.addEventListener("keyup", handleKeyUp);
     }
-    ;
     function drawBackground() {
         drawOutside();
         drawRestaurant();
         drawTable();
     }
-    ;
     function drawOutside() {
         IcecreamShop.crc2.fillStyle = "#145c2c";
         IcecreamShop.crc2.fillRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
@@ -38,7 +31,6 @@ var IcecreamShop;
         IcecreamShop.crc2.fillRect(110, 110, 640, 70);
         IcecreamShop.crc2.fillRect(660, 0, 90, 120);
     }
-    ;
     function drawRestaurant() {
         IcecreamShop.crc2.fillStyle = "#878787";
         IcecreamShop.crc2.fillRect(0, 250, 900, 550);
@@ -122,8 +114,8 @@ var IcecreamShop;
         IcecreamShop.crc2.stroke();
         IcecreamShop.crc2.closePath();
     }
-    window.addEventListener("keydown", ({ key }) => {
-        switch (key) {
+    function handleKeyDown(event) {
+        switch (event.key) {
             case "w":
                 player.velocity.y = -5;
                 break;
@@ -137,7 +129,20 @@ var IcecreamShop;
                 player.velocity.x = 5;
                 break;
         }
-        console.log(player.velocity); // not quite working
-    });
+        console.log(player.velocity);
+    }
+    function handleKeyUp(event) {
+        switch (event.key) {
+            case "w":
+            case "s":
+                player.velocity.y = 0;
+                break;
+            case "a":
+            case "d":
+                player.velocity.x = 0;
+                break;
+        }
+        console.log(player.velocity);
+    }
 })(IcecreamShop || (IcecreamShop = {}));
 //# sourceMappingURL=iceCreamShop.js.map

@@ -3,44 +3,72 @@ var IcecreamShop;
     class Serveri {
         position;
         velocity;
-        drawServeri(_position, _velocity) {
+        constructor() {
+            // Set initial position and velocity
+            this.position = new IcecreamShop.Vector(0, 0);
+            this.velocity = new IcecreamShop.Vector(0, 0);
+            // Add event listeners for key presses
+            document.addEventListener("keydown", this.handleKeyDown.bind(this));
+            document.addEventListener("keyup", this.handleKeyUp.bind(this));
+        }
+        drawServeri() {
             console.log("Workinggg Server");
             IcecreamShop.crc2.beginPath();
             IcecreamShop.crc2.fillStyle = "#f6b6f4";
-            IcecreamShop.crc2.arc(_position.x, _position.y, 45, 0, 2 * Math.PI); //head pink  
+            IcecreamShop.crc2.arc(this.position.x, this.position.y, 45, 0, 2 * Math.PI); //head pink  
             IcecreamShop.crc2.fill();
             IcecreamShop.crc2.closePath();
             IcecreamShop.crc2.beginPath();
             IcecreamShop.crc2.fillStyle = "#000000";
-            IcecreamShop.crc2.fillRect(_position.x - 48, _position.y - 40, 95, 20); //head black1
-            IcecreamShop.crc2.fillRect(_position.x - 30, _position.y - 80, 60, 50); //head black2
+            IcecreamShop.crc2.fillRect(this.position.x - 48, this.position.y - 40, 95, 20); //head black1
+            IcecreamShop.crc2.fillRect(this.position.x - 30, this.position.y - 80, 60, 50); //head black2
             IcecreamShop.crc2.closePath();
             IcecreamShop.crc2.beginPath();
             IcecreamShop.crc2.fillStyle = "#000000";
-            IcecreamShop.crc2.fillRect(_position.x - 15, _position.y + 20, 30, 5); //mouth
-            IcecreamShop.crc2.fillRect(_position.x - 20, _position.y + 15, 5, 5); //mouth
-            IcecreamShop.crc2.fillRect(_position.x + 15, _position.y + 15, 5, 5); //mouth
+            IcecreamShop.crc2.fillRect(this.position.x - 15, this.position.y + 20, 30, 5); //mouth
+            IcecreamShop.crc2.fillRect(this.position.x - 20, this.position.y + 15, 5, 5); //mouth
+            IcecreamShop.crc2.fillRect(this.position.x + 15, this.position.y + 15, 5, 5); //mouth
             IcecreamShop.crc2.closePath();
             IcecreamShop.crc2.beginPath();
             IcecreamShop.crc2.fillStyle = "black";
-            IcecreamShop.crc2.arc(_position.x - 17, _position.y - 8, 10, 0, 1 * Math.PI); //eye left 
-            IcecreamShop.crc2.arc(_position.x + 15, _position.y - 8, 10, 0, 1 * Math.PI); //eye right
+            IcecreamShop.crc2.arc(this.position.x - 17, this.position.y - 8, 10, 0, 1 * Math.PI); //eye left 
+            IcecreamShop.crc2.arc(this.position.x + 15, this.position.y - 8, 10, 0, 1 * Math.PI); //eye right
             IcecreamShop.crc2.fill();
-        }
-        update() {
-            this.drawServeri({
-                x: 10, y: 10,
-                set: function (_x, _y) {
-                    throw new Error("Function not implemented.");
-                }
-            }, {
-                x: 10, y: 10,
-                set: function (_x, _y) {
-                    throw new Error("Function not implemented.");
-                }
-            });
             this.position.x += this.velocity.x;
             this.position.y += this.velocity.y;
+        }
+        update() {
+            this.drawServeri();
+        }
+        handleKeyDown(event) {
+            // Update the velocity based on the key pressed
+            switch (event.key) {
+                case "w":
+                    this.velocity.y = -1; // Move up
+                    break;
+                case "a":
+                    this.velocity.x = -1; // Move left
+                    break;
+                case "s":
+                    this.velocity.y = 1; // Move down
+                    break;
+                case "d":
+                    this.velocity.x = 1; // Move right
+                    break;
+            }
+        }
+        handleKeyUp(event) {
+            // Reset the velocity when the key is released
+            switch (event.key) {
+                case "w":
+                case "s":
+                    this.velocity.y = 0; // Stop vertical movement
+                    break;
+                case "a":
+                case "d":
+                    this.velocity.x = 0; // Stop horizontal movement
+                    break;
+            }
         }
     }
     IcecreamShop.Serveri = Serveri;
