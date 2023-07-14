@@ -6,8 +6,8 @@ namespace IcecreamShop {
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
   export  let player: Serveri;
     player = new Serveri();
-    let newC: customer = new customer(200,180,"#b56cd4", 5);
-    let newOffer: offer = new offer();
+    let newC: customer = new customer(200,300,"#b56cd4", 5, 40);
+   export let newOffer: offer = new offer();
     let Seat1: Seat = new Seat(1230, 80, 32); //Top right
     let Seat2: Seat = new Seat(1060, 600, 32); //right bottom
     let Seat3: Seat = new Seat(770, 700, 32); // bottom left 
@@ -17,18 +17,21 @@ namespace IcecreamShop {
    export function handleload(): void {
         drawBackground();
         player.drawServeri();
-        newC.drawCustomer();
+     
        // newOffer.drawOffer();
         // newOffer.flavorchange();
-
+         newC.drawCustomer();
+         
         setInterval(() => {
             player.update();
+            //newC.followPath();
             // Add any other update calls for animations here
-    
             drawBackground(); 
             player.drawServeri();
             newC.drawCustomer();
         }, 1000 / 25);
+
+
 
         newOffer.addEventListeners();
         // Add event listeners walking player
@@ -154,35 +157,4 @@ namespace IcecreamShop {
     
       
 
-    function handleKeyDown(event: KeyboardEvent): void {
-        switch (event.key) {
-            case "w":
-                player.velocity.y = -5;
-                break;
-            case "a":
-                player.velocity.x = -5;
-                break;
-            case "s":
-                player.velocity.y = 5;
-                break;
-            case "d":
-                player.velocity.x = 5;
-                break;
-        }
-        console.log(player.velocity);
-    }
-
-    function handleKeyUp(event: KeyboardEvent): void {
-        switch (event.key) {
-            case "w":
-            case "s":
-                player.velocity.y = 0;
-                break;
-            case "a":
-            case "d":
-                player.velocity.x = 0;
-                break;
-        }
-        console.log(player.velocity);
-    }
 }
