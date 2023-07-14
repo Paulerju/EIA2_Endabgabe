@@ -3,26 +3,26 @@ var IcecreamShop;
     class customer {
         x;
         y;
-        radius;
         color;
-        destination;
-        path;
-        constructor(x, y, radius, color) {
+        position;
+        targetSeat;
+        speed;
+        constructor(x, y, color, speed) {
             this.x = x;
             this.y = y;
-            this.radius = radius;
             this.color = color;
-            this.destination = null;
-            this.path = null;
+            this.position = new IcecreamShop.Vector(x, y);
+            this.targetSeat = null;
+            this.speed = speed;
         }
         drawCustomer() {
             IcecreamShop.crc2.beginPath();
             IcecreamShop.crc2.fillStyle = this.color;
-            IcecreamShop.crc2.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+            IcecreamShop.crc2.arc(this.x, this.y, 40, 0, 2 * Math.PI);
             IcecreamShop.crc2.fill();
             IcecreamShop.crc2.closePath();
             IcecreamShop.crc2.beginPath();
-            IcecreamShop.crc2.arc(this.x, this.y + 5, this.radius - 15, 0, 1 * Math.PI);
+            IcecreamShop.crc2.arc(this.x, this.y + 5, 40 - 15, 0, 1 * Math.PI);
             IcecreamShop.crc2.stroke();
             IcecreamShop.crc2.closePath();
             IcecreamShop.crc2.beginPath();
@@ -32,26 +32,27 @@ var IcecreamShop;
             IcecreamShop.crc2.fill();
         }
         move() {
-            if (this.destination) {
-                if (!this.path) {
-                    // Calculate path from current position to destination
-                    this.path = this.calculatePath(this.x, this.y, this.destination.x, this.destination.y);
+            if (this.targetSeat) {
+                const targetPosition = new IcecreamShop.Vector(this.targetSeat.getX(), this.targetSeat.getY());
+                const distance = new IcecreamShop.Vector(targetPosition.x - this.position.x, targetPosition.y - this.position.y);
+                if (distance.magnitude() > this.speed) {
+                    const direction = distance.normalize();
+                    const velocity = new IcecreamShop.Vector(direction.x * this.speed, direction.y * this.speed);
+                    this.position.x += velocity.x;
+                    this.position.y += velocity.y;
                 }
-                // Follow the path by moving to the next point
-                const nextPoint = this.path.getCurrentPoint();
-                if (nextPoint) {
-                    this.x = nextPoint.x;
-                    this.y = nextPoint.y;
-                }
-                // Check if the destination has been reached
-                if (this.x === this.destination.x && this.y === this.destination.y) {
-                    this.destination = null;
-                    this.path = null;
+                else {
+                    // Customer has reached the target seat
+                    this.targetSeat.assignCustomer(this);
+                    this.targetSeat = null;
                 }
             }
         }
-        setDestination(destination) {
-            this.destination = destination;
+        setDestination(seat) {
+            this.targetSeat = seat;
+            const path = this.calculatePath(this.x, this.y, seat.getX(), seat.getY());
+            // Call a function to animate the customer along the path
+            this.followPath(path);
         }
         calculatePath(x1, y1, x2, y2) {
             // Use any pathfinding algorithm to calculate the path from (x1, y1) to (x2, y2)
@@ -60,6 +61,61 @@ var IcecreamShop;
             path.moveTo(x1, y1);
             path.lineTo(x2, y2);
             return path;
+        }
+        followPath(path) {
+            const pathLength = this.getPathLength(path);
+            const stepSize = this.speed;
+            let currentDistance = 0;
+            const animateStep = () => {
+                if (currentDistance >= pathLength) {
+                    // Customer has reached the destination
+                    this.targetSeat?.assignCustomer(this);
+                    this.targetSeat = null;
+                    return;
+                }
+                currentDistance += stepSize;
+                const point = this.getPointOnPath(path, currentDistance);
+                this.position.x = point.x;
+                this.position.y = point.y;
+                // Redraw the customer at the new position
+                this.drawCustomer();
+                // Request the next frame of animation
+                requestAnimationFrame(animateStep);
+            };
+            // Start the animation
+            requestAnimationFrame(animateStep);
+        }
+        getPathLength(path) {
+            const tempCanvas = document.createElement("canvas");
+            const tempContext = tempCanvas.getContext("2d");
+            if (tempContext) {
+                tempContext.lineWidth = 1;
+                tempContext.stroke(path);
+                return tempContext.measure().width;
+            }
+            return 0;
+        }
+        getPointOnPath(path, distance) {
+            const tempCanvas = document.createElement("canvas");
+            const tempContext = tempCanvas.getContext("2d");
+            if (tempContext) {
+                const stepSize = 1;
+                const pathLength = this.getPathLength(path);
+                const steps = Math.floor(distance / stepSize);
+                const progress = steps * stepSize / pathLength;
+                let point = null;
+                tempContext.beginPath();
+                tempContext.lineWidth = 1;
+                tempContext.strokeStyle = "#000000";
+                tempContext.stroke(path);
+                for (let i = 0; i <= steps; i++) {
+                    point = tempContext.currentPath?.getCurrentPoint();
+                    tempContext.lineTo(point.x, point.y);
+                    tempContext.stroke();
+                }
+                return new IcecreamShop.Vector(point?.x ?? 0, point?.y ?? 0);
+            }
+            return new IcecreamShop.Vector(0, 0);
         }
         nutral() {
             IcecreamShop.crc2.beginPath();

@@ -7,7 +7,7 @@ namespace IcecreamShop {
 
         constructor() {
             // Set initial position and velocity
-            this.position = new Vector(0, 0);
+            this.position = new Vector(430, 710);
             this.velocity = new Vector(0, 0);
 
             // Add event listeners for key presses
@@ -46,6 +46,8 @@ namespace IcecreamShop {
     }
 
     update(): void {
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
         this.drawServeri();
     }
 
@@ -53,18 +55,19 @@ namespace IcecreamShop {
         // Update the velocity based on the key pressed
         switch (event.key) {
             case "w":
-                this.velocity.y = -1; // Move up
+                this.velocity.y = -5; // Move up
                 break;
             case "a":
-                this.velocity.x = -1; // Move left
+                this.velocity.x = -5; // Move left
                 break;
             case "s":
-                this.velocity.y = 1; // Move down
+                this.velocity.y = 5; // Move down
                 break;
             case "d":
-                this.velocity.x = 1; // Move right
+                this.velocity.x = 5; // Move right
                 break;
         }
+        console.log(this.velocity);
     }
 
     handleKeyUp(event: KeyboardEvent): void {
@@ -79,6 +82,7 @@ namespace IcecreamShop {
                 this.velocity.x = 0; // Stop horizontal movement
                 break;
         }
+        console.log(this.velocity);
     }
     
  }

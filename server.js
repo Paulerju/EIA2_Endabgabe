@@ -5,7 +5,7 @@ var IcecreamShop;
         velocity;
         constructor() {
             // Set initial position and velocity
-            this.position = new IcecreamShop.Vector(0, 0);
+            this.position = new IcecreamShop.Vector(430, 710);
             this.velocity = new IcecreamShop.Vector(0, 0);
             // Add event listeners for key presses
             document.addEventListener("keydown", this.handleKeyDown.bind(this));
@@ -38,24 +38,27 @@ var IcecreamShop;
             this.position.y += this.velocity.y;
         }
         update() {
+            this.position.x += this.velocity.x;
+            this.position.y += this.velocity.y;
             this.drawServeri();
         }
         handleKeyDown(event) {
             // Update the velocity based on the key pressed
             switch (event.key) {
                 case "w":
-                    this.velocity.y = -1; // Move up
+                    this.velocity.y = -5; // Move up
                     break;
                 case "a":
-                    this.velocity.x = -1; // Move left
+                    this.velocity.x = -5; // Move left
                     break;
                 case "s":
-                    this.velocity.y = 1; // Move down
+                    this.velocity.y = 5; // Move down
                     break;
                 case "d":
-                    this.velocity.x = 1; // Move right
+                    this.velocity.x = 5; // Move right
                     break;
             }
+            console.log(this.velocity);
         }
         handleKeyUp(event) {
             // Reset the velocity when the key is released
@@ -69,6 +72,7 @@ var IcecreamShop;
                     this.velocity.x = 0; // Stop horizontal movement
                     break;
             }
+            console.log(this.velocity);
         }
     }
     IcecreamShop.Serveri = Serveri;

@@ -4,25 +4,40 @@ var IcecreamShop;
     console.log("handleLoad working");
     IcecreamShop.canvas = document.querySelector("#shop");
     IcecreamShop.crc2 = IcecreamShop.canvas.getContext("2d");
-    let newC = new IcecreamShop.customer(200, 180, 40, "#b56cd4");
+    IcecreamShop.player = new IcecreamShop.Serveri();
+    let newC = new IcecreamShop.customer(200, 180, "#b56cd4", 5);
     let newOffer = new IcecreamShop.offer();
+    let Seat1 = new IcecreamShop.Seat(1230, 80, 32); //Top right
+    let Seat2 = new IcecreamShop.Seat(1060, 600, 32); //right bottom
+    let Seat3 = new IcecreamShop.Seat(770, 700, 32); // bottom left 
+    let Seat4 = new IcecreamShop.Seat(770, 320, 32); // top left
     function handleload() {
         drawBackground();
-        IcecreamShop.player = new IcecreamShop.Serveri();
         IcecreamShop.player.drawServeri();
         newC.drawCustomer();
         // newOffer.drawOffer();
         // newOffer.flavorchange();
+        setInterval(() => {
+            IcecreamShop.player.update();
+            // Add any other update calls for animations here
+            drawBackground();
+            IcecreamShop.player.drawServeri();
+            newC.drawCustomer();
+        }, 1000 / 25);
         newOffer.addEventListeners();
-        // Add event listeners for keydown and keyup events
-        window.addEventListener("keydown", handleKeyDown);
-        window.addEventListener("keyup", handleKeyUp);
+        // Add event listeners walking player
+        window.addEventListener("keydown", IcecreamShop.player.handleKeyDown.bind(IcecreamShop.player));
+        window.addEventListener("keyup", IcecreamShop.player.handleKeyUp.bind(IcecreamShop.player));
     }
     IcecreamShop.handleload = handleload;
     function drawBackground() {
         drawOutside();
         drawRestaurant();
         drawTable();
+        Seat1.drawSeat();
+        Seat2.drawSeat();
+        Seat3.drawSeat();
+        Seat4.drawSeat();
     }
     IcecreamShop.drawBackground = drawBackground;
     function drawOutside() {
@@ -41,6 +56,8 @@ var IcecreamShop;
         IcecreamShop.crc2.fillStyle = "#404040";
         IcecreamShop.crc2.fillRect(100, 250, 200, 10);
         IcecreamShop.crc2.fillRect(1390, 320, 10, 200);
+        IcecreamShop.crc2.closePath();
+        IcecreamShop.crc2.beginPath();
         IcecreamShop.crc2.fillStyle = "black";
         IcecreamShop.crc2.arc(80, 230, 7, 0, 2 * Math.PI);
         IcecreamShop.crc2.arc(320, 230, 7, 0, 2 * Math.PI);
@@ -65,7 +82,6 @@ var IcecreamShop;
         IcecreamShop.crc2.beginPath(); //Table top right
         IcecreamShop.crc2.arc(1120, 80, 50, 0, 2 * Math.PI);
         IcecreamShop.crc2.arc(1010, 80, 32, 0, 2 * Math.PI);
-        IcecreamShop.crc2.arc(1230, 80, 32, 0, 2 * Math.PI);
         IcecreamShop.crc2.fill();
         IcecreamShop.crc2.closePath();
         IcecreamShop.crc2.beginPath();
@@ -73,7 +89,6 @@ var IcecreamShop;
         IcecreamShop.crc2.fill();
         IcecreamShop.crc2.beginPath(); //Table bottom right
         IcecreamShop.crc2.arc(1170, 600, 50, 0, 2 * Math.PI);
-        IcecreamShop.crc2.arc(1060, 600, 32, 0, 2 * Math.PI);
         IcecreamShop.crc2.arc(1280, 600, 32, 0, 2 * Math.PI);
         IcecreamShop.crc2.fill();
         IcecreamShop.crc2.closePath();
@@ -86,11 +101,9 @@ var IcecreamShop;
         IcecreamShop.crc2.fill();
         IcecreamShop.crc2.closePath();
         IcecreamShop.crc2.beginPath();
-        IcecreamShop.crc2.arc(770, 700, 32, 0, 2 * Math.PI);
         IcecreamShop.crc2.fill();
         IcecreamShop.crc2.beginPath(); //Table top left
         IcecreamShop.crc2.arc(670, 320, 50, 0, 2 * Math.PI);
-        IcecreamShop.crc2.arc(770, 320, 32, 0, 2 * Math.PI);
         IcecreamShop.crc2.arc(570, 320, 32, 0, 2 * Math.PI);
         IcecreamShop.crc2.fill();
         IcecreamShop.crc2.closePath();
@@ -119,45 +132,6 @@ var IcecreamShop;
         IcecreamShop.crc2.closePath();
     }
     IcecreamShop.drawTable = drawTable;
-    class Seat {
-        x;
-        y;
-        radius;
-        occupied;
-        customer;
-        constructor(x, y, radius) {
-            this.x = x;
-            this.y = y;
-            this.radius = radius;
-            this.occupied = false;
-            this.customer = null;
-        }
-        drawSeat() {
-            IcecreamShop.crc2.beginPath();
-            IcecreamShop.crc2.fillStyle = this.occupied ? "#ff0000" : "#4696c2";
-            IcecreamShop.crc2.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-            IcecreamShop.crc2.fill();
-            IcecreamShop.crc2.closePath();
-        }
-        isOccupied() {
-            return this.occupied;
-        }
-        assignCustomer(customer) {
-            this.customer = customer;
-            this.occupied = true;
-        }
-        removeCustomer() {
-            this.customer = null;
-            this.occupied = false;
-        }
-        getX() {
-            return this.x;
-        }
-        getY() {
-            return this.y;
-        }
-    }
-    IcecreamShop.Seat = Seat;
     function handleKeyDown(event) {
         switch (event.key) {
             case "w":

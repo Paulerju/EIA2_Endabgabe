@@ -1,34 +1,49 @@
 namespace IcecreamShop {
     window.addEventListener("load", handleload);
     console.log("handleLoad working");
-
     export let crc2: CanvasRenderingContext2D;
     export let canvas: HTMLCanvasElement = document.querySelector("#shop")!;
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-
   export  let player: Serveri;
-    let newC: customer = new customer(200,180,40,"#b56cd4");
+    player = new Serveri();
+    let newC: customer = new customer(200,180,"#b56cd4", 5);
     let newOffer: offer = new offer();
+    let Seat1: Seat = new Seat(1230, 80, 32); //Top right
+    let Seat2: Seat = new Seat(1060, 600, 32); //right bottom
+    let Seat3: Seat = new Seat(770, 700, 32); // bottom left 
+    let Seat4: Seat = new Seat(770, 320, 32); // top left
+    
 
    export function handleload(): void {
         drawBackground();
-        player = new Serveri();
         player.drawServeri();
-
         newC.drawCustomer();
        // newOffer.drawOffer();
         // newOffer.flavorchange();
-        newOffer.addEventListeners();
 
-        // Add event listeners for keydown and keyup events
-        window.addEventListener("keydown", handleKeyDown);
-        window.addEventListener("keyup", handleKeyUp);
+        setInterval(() => {
+            player.update();
+            // Add any other update calls for animations here
+    
+            drawBackground(); 
+            player.drawServeri();
+            newC.drawCustomer();
+        }, 1000 / 25);
+
+        newOffer.addEventListeners();
+        // Add event listeners walking player
+       window.addEventListener("keydown", player.handleKeyDown.bind(player));
+       window.addEventListener("keyup", player.handleKeyUp.bind(player));
     }
 
   export function drawBackground(): void {
         drawOutside();
         drawRestaurant();
         drawTable();
+        Seat1.drawSeat();
+        Seat2.drawSeat();
+        Seat3.drawSeat();
+        Seat4.drawSeat();
     }
 
  export function drawOutside(): void {
@@ -49,7 +64,9 @@ namespace IcecreamShop {
         crc2.fillStyle = "#404040";
         crc2.fillRect(100, 250, 200, 10);
         crc2.fillRect(1390, 320, 10, 200);
+        crc2.closePath();
 
+        crc2.beginPath();
         crc2.fillStyle = "black";
         crc2.arc(80, 230, 7, 0, 2 * Math.PI);
         crc2.arc(320, 230, 7, 0, 2 * Math.PI);
@@ -75,7 +92,6 @@ namespace IcecreamShop {
         crc2.beginPath(); //Table top right
         crc2.arc(1120, 80, 50, 0, 2 * Math.PI);
         crc2.arc(1010, 80, 32, 0, 2 * Math.PI);
-        crc2.arc(1230, 80, 32, 0, 2 * Math.PI);
         crc2.fill();
         crc2.closePath();
         crc2.beginPath();
@@ -84,7 +100,6 @@ namespace IcecreamShop {
 
         crc2.beginPath(); //Table bottom right
         crc2.arc(1170, 600, 50, 0, 2 * Math.PI);
-        crc2.arc(1060, 600, 32, 0, 2 * Math.PI);
         crc2.arc(1280, 600, 32, 0, 2 * Math.PI);
         crc2.fill();
         crc2.closePath();
@@ -98,12 +113,10 @@ namespace IcecreamShop {
         crc2.fill();
         crc2.closePath();
         crc2.beginPath();
-        crc2.arc(770, 700, 32, 0, 2 * Math.PI);
         crc2.fill();
 
         crc2.beginPath(); //Table top left
         crc2.arc(670, 320, 50, 0, 2 * Math.PI);
-        crc2.arc(770, 320, 32, 0, 2 * Math.PI);
         crc2.arc(570, 320, 32, 0, 2 * Math.PI);
         crc2.fill();
         crc2.closePath();
@@ -138,52 +151,7 @@ namespace IcecreamShop {
         crc2.stroke();
         crc2.closePath();
     }
-
-        export class Seat {
-          private x: number;
-          private y: number;
-          private radius: number;
-          private occupied: boolean;
-          private customer: customer | null;
-      
-          constructor(x: number, y: number, radius: number) {
-            this.x = x;
-            this.y = y;
-            this.radius = radius;
-            this.occupied = false;
-            this.customer = null;
-          }
-      
-          drawSeat(): void {
-            crc2.beginPath();
-            crc2.fillStyle = this.occupied ? "#ff0000" : "#4696c2";
-            crc2.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-            crc2.fill();
-            crc2.closePath();
-          }
-      
-          isOccupied(): boolean {
-            return this.occupied;
-          }
-      
-          assignCustomer(customer: customer): void {
-            this.customer = customer;
-            this.occupied = true;
-          }
-      
-          removeCustomer(): void {
-            this.customer = null;
-            this.occupied = false;
-          }
-      
-          getX(): number {
-            return this.x;
-          }
-      
-          getY(): number {
-            return this.y;
-          }
-      }
+    
       
 
     function handleKeyDown(event: KeyboardEvent): void {
