@@ -5,8 +5,8 @@ var IcecreamShop;
     IcecreamShop.canvas = document.querySelector("#shop");
     IcecreamShop.crc2 = IcecreamShop.canvas.getContext("2d");
     IcecreamShop.player = new IcecreamShop.Serveri();
-    let newC = new IcecreamShop.customer(200, 180, "#b56cd4", 5);
-    let newOffer = new IcecreamShop.offer();
+    let newC = new IcecreamShop.customer(200, 300, "#b56cd4", 5, 40);
+    IcecreamShop.newOffer = new IcecreamShop.offer();
     let Seat1 = new IcecreamShop.Seat(1230, 80, 32); //Top right
     let Seat2 = new IcecreamShop.Seat(1060, 600, 32); //right bottom
     let Seat3 = new IcecreamShop.Seat(770, 700, 32); // bottom left 
@@ -14,17 +14,18 @@ var IcecreamShop;
     function handleload() {
         drawBackground();
         IcecreamShop.player.drawServeri();
-        newC.drawCustomer();
         // newOffer.drawOffer();
         // newOffer.flavorchange();
+        newC.drawCustomer();
         setInterval(() => {
             IcecreamShop.player.update();
+            //newC.followPath();
             // Add any other update calls for animations here
             drawBackground();
             IcecreamShop.player.drawServeri();
             newC.drawCustomer();
         }, 1000 / 25);
-        newOffer.addEventListeners();
+        IcecreamShop.newOffer.addEventListeners();
         // Add event listeners walking player
         window.addEventListener("keydown", IcecreamShop.player.handleKeyDown.bind(IcecreamShop.player));
         window.addEventListener("keyup", IcecreamShop.player.handleKeyUp.bind(IcecreamShop.player));
@@ -132,35 +133,5 @@ var IcecreamShop;
         IcecreamShop.crc2.closePath();
     }
     IcecreamShop.drawTable = drawTable;
-    function handleKeyDown(event) {
-        switch (event.key) {
-            case "w":
-                IcecreamShop.player.velocity.y = -5;
-                break;
-            case "a":
-                IcecreamShop.player.velocity.x = -5;
-                break;
-            case "s":
-                IcecreamShop.player.velocity.y = 5;
-                break;
-            case "d":
-                IcecreamShop.player.velocity.x = 5;
-                break;
-        }
-        console.log(IcecreamShop.player.velocity);
-    }
-    function handleKeyUp(event) {
-        switch (event.key) {
-            case "w":
-            case "s":
-                IcecreamShop.player.velocity.y = 0;
-                break;
-            case "a":
-            case "d":
-                IcecreamShop.player.velocity.x = 0;
-                break;
-        }
-        console.log(IcecreamShop.player.velocity);
-    }
 })(IcecreamShop || (IcecreamShop = {}));
 //# sourceMappingURL=iceCreamShop.js.map
