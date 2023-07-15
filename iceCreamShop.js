@@ -14,18 +14,15 @@ var IcecreamShop;
     function handleload() {
         drawBackground();
         IcecreamShop.player.drawServeri();
-        // newOffer.drawOffer();
-        // newOffer.flavorchange();
         newC.drawCustomer();
-        setInterval(() => {
-            IcecreamShop.player.update();
-            //newC.followPath();
-            // Add any other update calls for animations here
-            drawBackground();
-            IcecreamShop.player.drawServeri();
-            newC.drawCustomer();
-        }, 1000 / 25);
-        IcecreamShop.hndlformular();
+        /*   setInterval(() => {
+               player.update();
+               //newC.followPath();
+               drawBackground();
+               player.drawServeri();
+               newC.drawCustomer();
+           }, 1000 / 25); */
+        handleOffer();
         IcecreamShop.newOffer.addEventListeners();
         // Add event listeners walking player
         window.addEventListener("keydown", IcecreamShop.player.handleKeyDown.bind(IcecreamShop.player));
@@ -154,14 +151,15 @@ var IcecreamShop;
     }
     IcecreamShop.saveData = saveData;
     function handleOffer() {
+        IcecreamShop.hndlformular();
         let button1 = document.querySelector("#but2");
         button1.addEventListener("click", () => {
+            handleload();
+            console.log("clear Offer");
             this.saveData();
-            //close the offer screen
             let wrapper = document.querySelector("#wrapper");
             wrapper.classList.add("hidden");
             IcecreamShop.crc2.clearRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
-            handleload();
         });
     }
     IcecreamShop.handleOffer = handleOffer;

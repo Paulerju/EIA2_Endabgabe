@@ -113,7 +113,11 @@ h1{
 
 #list{
 visibility: visible;
-width: 400px;
-height: 400px;
-background-color: aqua
+position: absolute;
+top: 17%;
+width: 380px;
+height: 600px;
+right: 10px;
+padding: 20px;
+background-color: rgb(69, 142, 184)
 }

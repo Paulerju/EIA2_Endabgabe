@@ -91,7 +91,6 @@ var IcecreamShop;
                 default:
                     break;
             }
-            IcecreamShop.player.update();
         }
         bowl() {
             let crc2;
@@ -263,7 +262,6 @@ var IcecreamShop;
             toppingSelect.addEventListener("change", () => {
                 this.toppingchange();
             });
-            IcecreamShop.player.update();
         }
         ;
     }

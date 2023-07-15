@@ -69,7 +69,7 @@ var IcecreamShop;
         let customerData = getData();
         document.getElementById("list").appendChild(newdiv);
         document.querySelector("#list").appendChild(newP);
-        newP.innerHTML = "Anzahl Kugeln: " + customerData[0] + ", <br> Sorte: " + customerData[1] + ", <br>Souce: " + customerData[2] + ", <br>Streusel: " + customerData[3];
+        newP.innerHTML = "flavor : " + customerData[0] + ", <br> sauce: " + customerData[1] + ", <br> toppings: " + customerData[2] + ", <br> amount: " + customerData[3];
         e.preventDefault();
         newP.appendChild(edit);
     }

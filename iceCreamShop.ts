@@ -14,23 +14,20 @@ namespace IcecreamShop {
     let Seat4: Seat = new Seat(770, 320, 32); // top left
     
 
-   export function handleload(): void {
+   export function handleload(): void { 
         drawBackground();
         player.drawServeri();
-     
-       // newOffer.drawOffer();
-        // newOffer.flavorchange();
          newC.drawCustomer();
          
-        setInterval(() => {
+     /*   setInterval(() => {
             player.update();
-            //newC.followPath();
-            // Add any other update calls for animations here
+            //newC.followPath(); 
             drawBackground(); 
             player.drawServeri();
             newC.drawCustomer();
-        }, 1000 / 25);
-        hndlformular();
+        }, 1000 / 25); */
+        
+        handleOffer();
         newOffer.addEventListeners();
         // Add event listeners walking player
        window.addEventListener("keydown", player.handleKeyDown.bind(player));
@@ -183,15 +180,14 @@ namespace IcecreamShop {
       }
 
       export function handleOffer(){
+        hndlformular();
         let button1 = document.querySelector("#but2");
         button1.addEventListener("click", () => {
+            handleload(); console.log("clear Offer");
           this.saveData();
-    
-          //close the offer screen
           let wrapper = document.querySelector("#wrapper");
           wrapper.classList.add("hidden");
           crc2.clearRect(0, 0, canvas.width, canvas.height);
-          handleload();
                 }); }
 
     

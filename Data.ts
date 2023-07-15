@@ -3,8 +3,7 @@ namespace IcecreamShop{
     export interface data  {
         
             [key: string]: string | string[];
-          }
-        
+          } 
           let edit = document.createElement("button");   // edit button erstellen
           edit.setAttribute("id", "edit");
           edit.innerHTML = "Edit";
@@ -20,7 +19,10 @@ namespace IcecreamShop{
             edit.addEventListener("click", editbtn);
             document.querySelector("#but2")!.addEventListener("click", addbtn);
             submit.addEventListener("click", sendTask);
+            
           }
+
+          
         
           export function getData(): string[] {
             let flavorSelect = document.querySelector("#flavor") as HTMLSelectElement;
@@ -94,7 +96,7 @@ namespace IcecreamShop{
     document.getElementById("list")!.appendChild(newdiv);
     document.querySelector("#list")!.appendChild(newP);
 
-    newP.innerHTML = "Anzahl Kugeln: " + customerData[0] + ", <br> Sorte: " + customerData[1] + ", <br>Souce: " + customerData[2] + ", <br>Streusel: " + customerData[3];
+    newP.innerHTML = "flavor : " + customerData[0] + ", <br> sauce: " + customerData[1] + ", <br> toppings: " + customerData[2] + ", <br> amount: " + customerData[3];
     e.preventDefault();
     newP.appendChild(edit);
   }

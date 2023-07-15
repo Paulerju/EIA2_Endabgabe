@@ -16,7 +16,7 @@ namespace IcecreamShop {
             this.toppingchange();
             console.log("draw offer");
 
-        }
+        } 
 
         flavorchange(): void {
             let crc2: CanvasRenderingContext2D;
@@ -106,7 +106,7 @@ namespace IcecreamShop {
                     break;
               default:
                 break;
-            } player.update();
+            } 
           }
           
 
@@ -299,9 +299,7 @@ namespace IcecreamShop {
             const toppingSelect = document.querySelector("#toppings") as HTMLSelectElement;
             toppingSelect.addEventListener("change", () => {
               this.toppingchange();
-            }); 
-          
-            player.update();              
+            });          
         };  
 
         
