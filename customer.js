@@ -66,7 +66,8 @@ var IcecreamShop;
         followPath() {
             const path = [
                 new IcecreamShop.Vector(this.x, this.y),
-                new IcecreamShop.Vector(1230, 80)
+                new IcecreamShop.Vector(1230, 80),
+                new IcecreamShop.Vector(800, 100)
             ];
             let currentPathIndex = 0;
             const animateStep = () => {

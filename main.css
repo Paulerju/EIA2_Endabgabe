@@ -110,3 +110,10 @@ h1{
 .hidden{
     display: none;
 }
+
+#list{
+visibility: visible;
+width: 400px;
+height: 400px;
+background-color: aqua
+}

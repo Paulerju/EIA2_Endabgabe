@@ -30,13 +30,13 @@ namespace IcecreamShop {
             player.drawServeri();
             newC.drawCustomer();
         }, 1000 / 25);
-
-
-
+        hndlformular();
         newOffer.addEventListeners();
         // Add event listeners walking player
        window.addEventListener("keydown", player.handleKeyDown.bind(player));
        window.addEventListener("keyup", player.handleKeyUp.bind(player));
+
+      
     }
 
   export function drawBackground(): void {
@@ -154,6 +154,46 @@ namespace IcecreamShop {
         crc2.stroke();
         crc2.closePath();
     }
+
+
+    export function saveData(): void {
+
+        let flavorSelect = document.querySelector("#flavor") as HTMLSelectElement;
+        let selectedFlavor = flavorSelect.value;
+  
+        let sauceSelect = document.querySelector("#sauce") as HTMLSelectElement;
+        let selectedSauce = sauceSelect.value;
+  
+        let toppingSelect = document.querySelector("#toppings") as HTMLSelectElement;
+        let selectedTopping = toppingSelect.value;
+
+        let numberSelect = document.querySelector("#number") as HTMLSelectElement;
+        let selectedNumber = numberSelect.value;
+  
+        let customerData = {
+          flavor: selectedFlavor,
+          sauce: selectedSauce,
+          toppings: selectedTopping,
+          number: selectedNumber
+
+        }; console.log("customerData: " +customerData);
+  
+        this.sendTask(customerData);
+
+      }
+
+      export function handleOffer(){
+        let button1 = document.querySelector("#but2");
+        button1.addEventListener("click", () => {
+          this.saveData();
+    
+          //close the offer screen
+          let wrapper = document.querySelector("#wrapper");
+          wrapper.classList.add("hidden");
+          crc2.clearRect(0, 0, canvas.width, canvas.height);
+          handleload();
+                }); }
+
     
       
 

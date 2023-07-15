@@ -25,6 +25,7 @@ var IcecreamShop;
             IcecreamShop.player.drawServeri();
             newC.drawCustomer();
         }, 1000 / 25);
+        IcecreamShop.hndlformular();
         IcecreamShop.newOffer.addEventListeners();
         // Add event listeners walking player
         window.addEventListener("keydown", IcecreamShop.player.handleKeyDown.bind(IcecreamShop.player));
@@ -133,5 +134,36 @@ var IcecreamShop;
         IcecreamShop.crc2.closePath();
     }
     IcecreamShop.drawTable = drawTable;
+    function saveData() {
+        let flavorSelect = document.querySelector("#flavor");
+        let selectedFlavor = flavorSelect.value;
+        let sauceSelect = document.querySelector("#sauce");
+        let selectedSauce = sauceSelect.value;
+        let toppingSelect = document.querySelector("#toppings");
+        let selectedTopping = toppingSelect.value;
+        let numberSelect = document.querySelector("#number");
+        let selectedNumber = numberSelect.value;
+        let customerData = {
+            flavor: selectedFlavor,
+            sauce: selectedSauce,
+            toppings: selectedTopping,
+            number: selectedNumber
+        };
+        console.log("customerData: " + customerData);
+        this.sendTask(customerData);
+    }
+    IcecreamShop.saveData = saveData;
+    function handleOffer() {
+        let button1 = document.querySelector("#but2");
+        button1.addEventListener("click", () => {
+            this.saveData();
+            //close the offer screen
+            let wrapper = document.querySelector("#wrapper");
+            wrapper.classList.add("hidden");
+            IcecreamShop.crc2.clearRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
+            handleload();
+        });
+    }
+    IcecreamShop.handleOffer = handleOffer;
 })(IcecreamShop || (IcecreamShop = {}));
 //# sourceMappingURL=iceCreamShop.js.map

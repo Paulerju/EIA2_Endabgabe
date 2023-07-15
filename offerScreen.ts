@@ -1,5 +1,4 @@
 namespace IcecreamShop {
-
     export class offer {
 
         drawOffer(): void {
@@ -96,8 +95,9 @@ namespace IcecreamShop {
               case "smarties":
                 this.flavorchange();
                 this.saucechange(); 
-                this.bowl();               
                 this.drawsmarties();
+                this.bowl();               
+                
                 break;
                 case "nothing":
                     this.flavorchange();
@@ -209,6 +209,7 @@ namespace IcecreamShop {
             crc2.fillRect(280, -75, 8, 2);
             crc2.fillRect(210, -80, 8, 2);
             crc2.fillRect(190, -60, 8, 2);
+            crc2.rotate(0);
             crc2.closePath();
 
             crc2.beginPath();
@@ -223,6 +224,7 @@ namespace IcecreamShop {
             crc2.fillRect(150, -230, 8, 2);
             crc2.fillRect(130, -270, 8, 2);
             crc2.fillRect(130, -190, 8, 2);
+            crc2.rotate(0);
             crc2.closePath();
 
             crc2.beginPath();
@@ -248,6 +250,7 @@ namespace IcecreamShop {
             crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
             crc2.beginPath();
+            crc2.rotate(0);
             crc2.fillStyle = "#8a032b";
             crc2.ellipse(200,80, 8, 2, 3, 0, 20);
             crc2.ellipse(240, 130, 8, 2, 3, 0, 20);
@@ -280,6 +283,7 @@ namespace IcecreamShop {
 
         }
 
+     
         addEventListeners(): void {
             const flavorSelect = document.querySelector("#flavor") as HTMLSelectElement;
             flavorSelect.addEventListener("change", () => {
@@ -297,16 +301,10 @@ namespace IcecreamShop {
               this.toppingchange();
             }); 
           
-            player.update();//Event listener Offer Toppings
-
-            let button1 = document.querySelector("#but2");
-            button1.addEventListener("click",() => {
-                let wrapper = document.querySelector("#wrapper");
-            wrapper.classList.add("hidden");
-            crc2.clearRect(0,0,canvas.width,canvas.height);
-                handleload();
-              }); 
+            player.update();              
         };  
+
+        
         
 
     }

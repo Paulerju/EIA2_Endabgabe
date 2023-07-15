@@ -78,7 +78,8 @@ namespace IcecreamShop {
           followPath(): void {
             const path: Vector[] = [
               new Vector(this.x, this.y),
-              new Vector(1230, 80)
+              new Vector(1230, 80),
+              new Vector(800, 100)
             ];
           
             let currentPathIndex = 0;

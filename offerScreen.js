@@ -80,8 +80,8 @@ var IcecreamShop;
                 case "smarties":
                     this.flavorchange();
                     this.saucechange();
-                    this.bowl();
                     this.drawsmarties();
+                    this.bowl();
                     break;
                 case "nothing":
                     this.flavorchange();
@@ -182,6 +182,7 @@ var IcecreamShop;
             crc2.fillRect(280, -75, 8, 2);
             crc2.fillRect(210, -80, 8, 2);
             crc2.fillRect(190, -60, 8, 2);
+            crc2.rotate(0);
             crc2.closePath();
             crc2.beginPath();
             crc2.rotate((44 * Math.PI) / 180);
@@ -195,6 +196,7 @@ var IcecreamShop;
             crc2.fillRect(150, -230, 8, 2);
             crc2.fillRect(130, -270, 8, 2);
             crc2.fillRect(130, -190, 8, 2);
+            crc2.rotate(0);
             crc2.closePath();
             crc2.beginPath();
             crc2.rotate((46 * Math.PI) / 180);
@@ -217,6 +219,7 @@ var IcecreamShop;
             let canvas = document.querySelector("#canvas2");
             crc2 = canvas.getContext("2d");
             crc2.beginPath();
+            crc2.rotate(0);
             crc2.fillStyle = "#8a032b";
             crc2.ellipse(200, 80, 8, 2, 3, 0, 20);
             crc2.ellipse(240, 130, 8, 2, 3, 0, 20);
@@ -260,14 +263,7 @@ var IcecreamShop;
             toppingSelect.addEventListener("change", () => {
                 this.toppingchange();
             });
-            IcecreamShop.player.update(); //Event listener Offer Toppings
-            let button1 = document.querySelector("#but2");
-            button1.addEventListener("click", () => {
-                let wrapper = document.querySelector("#wrapper");
-                wrapper.classList.add("hidden");
-                IcecreamShop.crc2.clearRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
-                IcecreamShop.handleload();
-            });
+            IcecreamShop.player.update();
         }
         ;
     }
