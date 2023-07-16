@@ -1,12 +1,19 @@
 namespace IcecreamShop {
 
+  enum CustomerState {
+    Walking,
+    Ordering,
+    Eating,
+    FinishedEating,
+  }
+
   export class customer {
 
            x: number;
            y: number; 
            color: string;
            radius: number; 
-           private position: Vector;
+           position: Vector;
            private speed: number;
       
           constructor(x: number, y: number, color: string, speed: number, radius: number) {
@@ -19,6 +26,7 @@ namespace IcecreamShop {
            
           } 
 
+          currentState: CustomerState = CustomerState.Walking;
       
           drawCustomer(): void {
             crc2.beginPath();
@@ -35,26 +43,6 @@ namespace IcecreamShop {
             crc2.arc(this.x - 10, this.y - 5, 7, 0, 2 * Math.PI);
             crc2.arc(this.x + 10, this.y - 5, 7, 0, 2 * Math.PI);
             crc2.fill();
-
-
-          
-            //Eventlistener for customer
-          /*  let circleRadius = this.radius;
-            let circleCenterX = this.x;
-            let circleCenterY = this.y;
-          
-            crc2.canvas.addEventListener("click", (event) => {
-              let canvasRect = crc2.canvas.getBoundingClientRect();
-              let clickX = event.clientX - canvasRect.left;
-              let clickY = event.clientY - canvasRect.top;
-          
-              let distanceToCenter = Math.sqrt(
-                (clickX - circleCenterX) ** 2 + (clickY - circleCenterY) ** 2
-              );
-          
-              if (distanceToCenter <= circleRadius) {
-                newOffer.drawOffer();}
-            });*/
           }
 
           followPath(): void {
@@ -105,25 +93,28 @@ namespace IcecreamShop {
           followPath2(): void {
             let path: Vector[] = [
               new Vector(this.x, this.y),
-              new Vector(100, 100),
+              new Vector(1500, 500)
             ];
           
             let currentPathIndex = 0;
           
             let animateStep = () => {
-        
-              let currentPosition = path[currentPathIndex];
-              let nextPosition = path[currentPathIndex + 1];
-              let distance = nextPosition.subtract(currentPosition);
-              if (currentPathIndex >= path.length - 1) {
-                
-              }
-
-
-              if (distance.magnitude() > this.speed) {
-                let direction = distance.normalize();
-                let velocity = direction.scale(this.speed);
-                this.position = currentPosition.add(velocity);
+              if (currentPathIndex >= path.length) {
+                 this.drawBubble();
+              } 
+          
+              let targetPosition = path[currentPathIndex];
+              let distanceX = targetPosition.x - this.position.x;
+              let distanceY = targetPosition.y - this.position.y;
+              let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+          
+              if (distance > this.speed) {
+                let directionX = distanceX / distance;
+                let directionY = distanceY / distance;
+                let velocityX = directionX * this.speed;
+                let velocityY = directionY * this.speed;
+                this.position.x += velocityX;
+                this.position.y += velocityY;
               } else {
                 // Move to the next point in the path
                 currentPathIndex++;
@@ -132,9 +123,6 @@ namespace IcecreamShop {
               // Update the customer's position
               this.x = this.position.x;
               this.y = this.position.y;
-          
-              // Redraw the background
-              drawBackground();
           
               // Redraw the customer at the new position
               this.drawCustomer();
@@ -200,8 +188,6 @@ namespace IcecreamShop {
       crc2.fill();
       crc2.closePath();
 
-     
-
       crc2.beginPath();
       crc2.fillStyle = "#80112a";
       crc2.arc(this.position.x + 70, this.position.y - 56, 8, 0, 2 * Math.PI);
@@ -230,6 +216,47 @@ namespace IcecreamShop {
 
     }
 
+    finished: boolean = false; 
+
+    eat(){
+      crc2.beginPath();
+      crc2.fillStyle= "#9146a3";
+      crc2.arc(this.x, this.y + 5, this.radius - 16, 0, 1 * Math.PI);
+      crc2.fill();
+      crc2.closePath();
+
+      setTimeout(() => {
+        this.finished = true; 
+
+      }, 5000); 
     }
 
+    receipt(){
+
+      crc2.beginPath();
+      crc2.fillStyle = "#f5f5f5"; 
+      crc2.arc(this.position.x + 70, this.position.y - 40, 30, 0, 2 * Math.PI);
+      crc2.fill();
+      crc2.closePath();
+
+      crc2.beginPath();
+      crc2.fillStyle = "black"; 
+      crc2.rect(this.position.x + 58, this.position.y - 56,25,35);
+      crc2.fillRect(this.position.x + 60, this.position.y - 54,20,1);
+      crc2.fillRect(this.position.x + 60, this.position.y - 52,20,1);
+      crc2.fillRect(this.position.x + 60, this.position.y - 50,20,1);
+      crc2.fillRect(this.position.x + 60, this.position.y - 48,20,1);
+      crc2.fillRect(this.position.x + 60, this.position.y - 46,20,1);
+      crc2.stroke();
+      crc2.closePath();
+      crc2.beginPath();
+      crc2.fillStyle = "#dbb04b"; 
+      crc2.arc(this.position.x + 76, this.position.y - 25,6,0, 2*Math.PI);
+      crc2.arc(this.position.x + 83, this.position.y - 27,6,0, 2*Math.PI);
+      crc2.fill();
+      crc2.closePath();
+
+    }
+
+}
 }

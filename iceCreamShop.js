@@ -15,6 +15,8 @@ var IcecreamShop;
     let clicked = false;
     let clickedCust = false;
     let foodhold = false;
+    let giveFood = false;
+    let finished = false;
     function handleload() {
         drawBackground();
         IcecreamShop.player.drawServeri();
@@ -25,15 +27,27 @@ var IcecreamShop;
             drawBackground();
             IcecreamShop.player.drawServeri();
             IcecreamShop.newC.drawCustomer();
-            if (clickedCust) {
-                // Add your new function to the interval here
+            if (clickedCust) { //give customer Offer
                 IcecreamShop.newOffer.drawOffer();
             }
-            if (foodhold) {
+            if (foodhold) { //server takes Icecream
                 IcecreamShop.player.drawIce();
             }
-            if (clicked) {
-                // Add your new function to the interval here
+            if (finished) { //customer payed
+                IcecreamShop.newC.finished = false;
+                IcecreamShop.newC.followPath2();
+            }
+            if (IcecreamShop.newC.finished) { //customer finished eating
+                giveFood = false;
+                IcecreamShop.newC.receipt();
+            }
+            if (giveFood) { //customer gets Icecream
+                foodhold = false;
+                clicked = false;
+                IcecreamShop.newC.eat();
+                drawTableIce();
+            }
+            if (clicked) { //Ordered
                 clickedCust = false;
                 let wrapper = document.querySelector("#wrapper");
                 wrapper.classList.add("hidden");
@@ -149,6 +163,32 @@ var IcecreamShop;
         IcecreamShop.crc2.closePath();
     }
     IcecreamShop.drawTable = drawTable;
+    function drawTableIce() {
+        IcecreamShop.crc2.beginPath();
+        IcecreamShop.crc2.fillStyle = "#80112a";
+        IcecreamShop.crc2.arc(1135, 44, 8, 0, 2 * Math.PI);
+        IcecreamShop.crc2.fill();
+        IcecreamShop.crc2.closePath();
+        IcecreamShop.crc2.beginPath();
+        IcecreamShop.crc2.fillStyle = "#991433";
+        IcecreamShop.crc2.arc(1135 - 7, 52, 8, 0, 2 * Math.PI);
+        IcecreamShop.crc2.arc(1135 + 7, 52, 8, 0, 2 * Math.PI);
+        IcecreamShop.crc2.fill();
+        IcecreamShop.crc2.closePath();
+        IcecreamShop.crc2.beginPath();
+        IcecreamShop.crc2.fillStyle = "#b0edff";
+        IcecreamShop.crc2.arc(1135, 81, 6, 1 * Math.PI, 2 * Math.PI);
+        IcecreamShop.crc2.fill();
+        IcecreamShop.crc2.closePath();
+        IcecreamShop.crc2.beginPath();
+        IcecreamShop.crc2.arc(1135, 55, 15, 0, 1 * Math.PI);
+        IcecreamShop.crc2.fill();
+        IcecreamShop.crc2.closePath();
+        IcecreamShop.crc2.beginPath();
+        IcecreamShop.crc2.arc(1135, 72, 4, 0, 2 * Math.PI);
+        IcecreamShop.crc2.fill();
+        IcecreamShop.crc2.closePath();
+    }
     function saveData() {
         let flavorSelect = document.querySelector("#flavor");
         let selectedFlavor = flavorSelect.value;
@@ -204,5 +244,21 @@ var IcecreamShop;
             }
         });
     }
+    IcecreamShop.crc2.canvas.addEventListener("click", (event) => {
+        const rect = IcecreamShop.canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        if (x >= IcecreamShop.newC.position.x + 40 && x <= IcecreamShop.newC.position.x + 100 &&
+            y >= IcecreamShop.newC.position.y - 70 && y <= IcecreamShop.newC.position.y - 10) {
+            if (clicked) {
+                giveFood = true;
+                IcecreamShop.newC.eat();
+            }
+            else {
+                finished = true;
+                //Money goes up
+            }
+        }
+    });
 })(IcecreamShop || (IcecreamShop = {}));
 //# sourceMappingURL=iceCreamShop.js.map
