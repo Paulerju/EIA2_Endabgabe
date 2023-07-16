@@ -54,6 +54,8 @@ var IcecreamShop;
         ("ID: " + url); //got the id here, but its not getting it in response? 
         let response = await fetch(url);
         ("response : " + response);
+        let totalPrice = IcecreamShop.newOffer.calculatePrice(); // total price will save in customer now 
+        IcecreamShop.newC.updateTotalPrice(totalPrice);
         if (response.ok) {
             let data = await response.json();
             if (data.id) {
@@ -104,7 +106,6 @@ var IcecreamShop;
         let response = await fetch("https://webuser.hs-furtwangen.de/~paulerju/Database/" + "?" + query.toString());
         if (response.ok) {
             alert("Task deleted!");
-            console.log("DELETED");
         }
     }
 })(IcecreamShop || (IcecreamShop = {}));

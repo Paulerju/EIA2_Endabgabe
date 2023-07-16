@@ -2,6 +2,7 @@ namespace IcecreamShop {
   export interface data {
     [key: string]: string | string[];
   }
+
   let edit = document.createElement("button");
   edit.setAttribute("id", "edit");
   edit.innerHTML = "Edit";
@@ -73,7 +74,10 @@ namespace IcecreamShop {
 
     let urlParams = query.toString();
     let url = `https://webuser.hs-furtwangen.de/~paulerju/Database/?${urlParams}`;("ID: "+url); //got the id here, but its not getting it in response? 
-    let response = await fetch(url); ("response : "+response); 
+    let response = await fetch(url); ("response : "+response);
+    
+      let totalPrice = newOffer.calculatePrice(); // total price will save in customer now 
+      newC.updateTotalPrice(totalPrice);
 
     if (response.ok) {
       let data = await response.json();
@@ -81,6 +85,7 @@ namespace IcecreamShop {
         newDocumentId = data.id;console.log
         console.log("Newly inserted document ID:", newDocumentId);
       }
+
     }
   }
 
@@ -130,7 +135,6 @@ namespace IcecreamShop {
     );
     if (response.ok) {
       alert("Task deleted!");
-      console.log("DELETED");
     }
   }
 

@@ -12,10 +12,12 @@ namespace IcecreamShop {
       smarties: 0.50,
     };
 
+    total:number = 0; 
+
     drawOffer(): void {
 
       crc2.fillStyle = "rgba(210, 210, 210, 0.5)";
-      crc2.fillRect(0, 0, canvas.width, canvas.height);
+      crc2.fillRect(0, 0, canvas.width, canvas.height); 
 
       crc2.fillStyle = "#4696c2";
       crc2.fillRect(390, 20, 550, 700);
@@ -324,7 +326,7 @@ namespace IcecreamShop {
 
     };
 
-    calculatePrice(): void { //get the price + price updates 
+    calculatePrice() { //get the price + price updates 
       let flavorSelect = document.querySelector("#flavor") as HTMLSelectElement;
       let selectedFlavor = flavorSelect.value;
 
@@ -338,11 +340,11 @@ namespace IcecreamShop {
       let selectedNumber = numberSelect.value;
       let selectedNumberI = parseInt(selectedNumber, 10); console.log(selectedNumberI);
 
-      let total = this.prices[selectedFlavor] * selectedNumberI + this.prices[selectedSauce] + this.prices[selectedTopping];
+      this.total = this.prices[selectedFlavor] * selectedNumberI + this.prices[selectedSauce] + this.prices[selectedTopping];
 
       let totalPriceElement = document.querySelector("#newp");
-      totalPriceElement.textContent = "Price: " + total.toString()+ "$";
-
+      totalPriceElement.textContent = "Price: " + this.total.toString()+ "$";
+      return this.total; 
     }
 
   }

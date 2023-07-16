@@ -8,7 +8,6 @@ namespace IcecreamShop {
            radius: number; 
            private position: Vector;
            private speed: number;
-
       
           constructor(x: number, y: number, color: string, speed: number, radius: number) {
             this.x = x;
@@ -18,7 +17,7 @@ namespace IcecreamShop {
             this.speed = speed;
             this.radius = radius; 
            
-          }
+          } 
       
           drawCustomer(): void {
             crc2.beginPath();
@@ -187,8 +186,11 @@ namespace IcecreamShop {
         crc2.fill();
 
     }
-
+    total: number = 0; 
+    updateTotalPrice(newTotal: number): void{
+      this.total = newTotal; 
     }
 
+    }
 
 }

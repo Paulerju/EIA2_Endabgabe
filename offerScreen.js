@@ -11,6 +11,7 @@ var IcecreamShop;
             sprinkles: 0.50,
             smarties: 0.50,
         };
+        total = 0;
         drawOffer() {
             IcecreamShop.crc2.fillStyle = "rgba(210, 210, 210, 0.5)";
             IcecreamShop.crc2.fillRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
@@ -293,9 +294,10 @@ var IcecreamShop;
             let selectedNumber = numberSelect.value;
             let selectedNumberI = parseInt(selectedNumber, 10);
             console.log(selectedNumberI);
-            let total = this.prices[selectedFlavor] * selectedNumberI + this.prices[selectedSauce] + this.prices[selectedTopping];
+            this.total = this.prices[selectedFlavor] * selectedNumberI + this.prices[selectedSauce] + this.prices[selectedTopping];
             let totalPriceElement = document.querySelector("#newp");
-            totalPriceElement.textContent = "Price: " + total.toString() + "$";
+            totalPriceElement.textContent = "Price: " + this.total.toString() + "$";
+            return this.total;
         }
     }
     IcecreamShop.offer = offer;

@@ -151,6 +151,10 @@ var IcecreamShop;
             IcecreamShop.crc2.arc(210, 295, 7, 0, 2 * Math.PI);
             IcecreamShop.crc2.fill();
         }
+        total = 0;
+        updateTotalPrice(newTotal) {
+            this.total = newTotal;
+        }
     }
     IcecreamShop.customer = customer;
 })(IcecreamShop || (IcecreamShop = {}));

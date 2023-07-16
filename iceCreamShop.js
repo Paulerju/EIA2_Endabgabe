@@ -5,7 +5,7 @@ var IcecreamShop;
     IcecreamShop.canvas = document.querySelector("#shop");
     IcecreamShop.crc2 = IcecreamShop.canvas.getContext("2d");
     IcecreamShop.player = new IcecreamShop.Serveri();
-    let newC = new IcecreamShop.customer(200, 300, "#b56cd4", 5, 40);
+    IcecreamShop.newC = new IcecreamShop.customer(200, 300, "#b56cd4", 5, 40);
     IcecreamShop.newOffer = new IcecreamShop.offer();
     let Seat1 = new IcecreamShop.Seat(1230, 80, 32); //Top right
     let Seat2 = new IcecreamShop.Seat(1060, 600, 32); //right bottom
@@ -14,7 +14,7 @@ var IcecreamShop;
     function handleload() {
         drawBackground();
         IcecreamShop.player.drawServeri();
-        newC.drawCustomer();
+        IcecreamShop.newC.drawCustomer();
         /* setInterval(() => {
               player.update();
               //newC.followPath();
