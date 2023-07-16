@@ -3,6 +3,7 @@ var IcecreamShop;
     class Serveri {
         position;
         velocity;
+        carrying = false;
         constructor() {
             // Set initial position and velocity
             this.position = new IcecreamShop.Vector(430, 710);

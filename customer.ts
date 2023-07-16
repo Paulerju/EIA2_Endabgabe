@@ -15,12 +15,13 @@ namespace IcecreamShop {
            radius: number; 
            position: Vector;
            private speed: number;
+           total: number = 0; 
       
           constructor(x: number, y: number, color: string, speed: number, radius: number) {
             this.x = x;
             this.y = y;
             this.color = color;
-            this.position = new Vector(x, y);
+            this.position = new Vector(x, y); this.total
             this.speed = speed;
             this.radius = radius; 
            
@@ -176,9 +177,9 @@ namespace IcecreamShop {
         crc2.fill();
 
     }
-    total: number = 0; 
-    updateTotalPrice(newTotal: number): void{
-      this.total = newTotal; 
+    
+    updateTotalPrice(): void{
+      this.total = newOffer.total; 
     }
 
     drawBubble(){

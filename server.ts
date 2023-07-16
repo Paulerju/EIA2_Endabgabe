@@ -4,6 +4,7 @@ namespace IcecreamShop {
 
         position: Vector;
         velocity: Vector; 
+        carrying: boolean = false; 
 
         constructor() {
             // Set initial position and velocity

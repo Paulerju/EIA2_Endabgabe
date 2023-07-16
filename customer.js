@@ -14,11 +14,13 @@ var IcecreamShop;
         radius;
         position;
         speed;
+        total = 0;
         constructor(x, y, color, speed, radius) {
             this.x = x;
             this.y = y;
             this.color = color;
             this.position = new IcecreamShop.Vector(x, y);
+            this.total;
             this.speed = speed;
             this.radius = radius;
         }
@@ -146,9 +148,8 @@ var IcecreamShop;
             IcecreamShop.crc2.arc(210, 295, 7, 0, 2 * Math.PI);
             IcecreamShop.crc2.fill();
         }
-        total = 0;
-        updateTotalPrice(newTotal) {
-            this.total = newTotal;
+        updateTotalPrice() {
+            this.total = IcecreamShop.newOffer.total;
         }
         drawBubble() {
             IcecreamShop.crc2.beginPath();

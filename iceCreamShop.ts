@@ -3,6 +3,7 @@ namespace IcecreamShop {
   console.log("handleLoad working");
   export let crc2: CanvasRenderingContext2D;
   export let canvas: HTMLCanvasElement = document.querySelector("#shop")!;
+  let moneyCount = document.querySelector("#money");
   crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
   export let player: Serveri;
   player = new Serveri();
@@ -12,6 +13,7 @@ namespace IcecreamShop {
   let Seat2: Seat = new Seat(1060, 600, 32); //right bottom
   let Seat3: Seat = new Seat(770, 700, 32); // bottom left 
   let Seat4: Seat = new Seat(770, 320, 32); // top left
+  let counter: number ; 
 
 
   let intervalId: number;
@@ -39,11 +41,14 @@ namespace IcecreamShop {
 
       if (foodhold) { //server takes Icecream
         player.drawIce();
+        player.carrying = true; 
       }
 
       if (finished) { //customer payed
         newC.finished  = false;
         newC.followPath2();
+        counter = counter + newC.total; 
+        moneyCount.innerHTML = counter.toString(); 
       }
 
       if (newC.finished) { //customer finished eating
@@ -295,9 +300,9 @@ namespace IcecreamShop {
     const y = event.clientY - rect.top;
   
     if (x >= newC.position.x + 40 && x <= newC.position.x + 100 &&
-        y >= newC.position.y - 70 && y <= newC.position.y - 10) {
-        
-      if (clicked) {
+        y >= newC.position.y - 70 && y <= newC.position.y - 10 && player.carrying == true) {
+ 
+      if (clicked) {   
         giveFood = true;
         newC.eat();
       } else {
