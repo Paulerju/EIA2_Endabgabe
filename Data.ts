@@ -119,6 +119,7 @@ namespace IcecreamShop {
     newP.appendChild(edit);
     let wrapper = document.querySelector("#wrapper");
     wrapper.classList.add("hidden");
+    newC.followPath(); 
   }
 
   async function editbtn() {

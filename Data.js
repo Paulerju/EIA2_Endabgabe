@@ -93,6 +93,7 @@ var IcecreamShop;
         newP.appendChild(edit);
         let wrapper = document.querySelector("#wrapper");
         wrapper.classList.add("hidden");
+        IcecreamShop.newC.followPath();
     }
     IcecreamShop.addbtn = addbtn;
     async function editbtn() {

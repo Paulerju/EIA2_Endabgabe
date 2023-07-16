@@ -16,7 +16,7 @@ namespace IcecreamShop {
 
     drawOffer(): void {
 
-      crc2.fillStyle = "rgba(210, 210, 210, 0.5)";
+      crc2.fillStyle = "rgba(210, 210, 210, 0.5)"; 
       crc2.fillRect(0, 0, canvas.width, canvas.height); 
 
       crc2.fillStyle = "#4696c2";
@@ -346,6 +346,9 @@ namespace IcecreamShop {
       totalPriceElement.textContent = "Price: " + this.total.toString()+ "$";
       return this.total; 
     }
+
+
+
 
   }
 }

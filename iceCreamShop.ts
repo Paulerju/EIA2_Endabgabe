@@ -14,18 +14,25 @@ namespace IcecreamShop {
     let Seat4: Seat = new Seat(770, 320, 32); // top left
     
 
-   export function handleload(): void { 
+    let intervalId: number;
+    let clicked: boolean = false;
+  
+    export function handleload(): void {
+      drawBackground();
+      player.drawServeri();
+      newC.drawCustomer();
+  
+      intervalId = setInterval(() => {
+        player.update();
         drawBackground();
         player.drawServeri();
-         newC.drawCustomer();
-         
-      /* setInterval(() => {
-            player.update();
-            //newC.followPath(); 
-            drawBackground(); 
-            player.drawServeri();
-            newC.drawCustomer();
-        }, 1000 / 25); */
+        newC.drawCustomer();
+  
+        if (clicked) {
+          // Add your new function to the interval here
+          newC.drawBubble();
+       }
+      }, 1000 / 25);
         
         handleOffer();
         newOffer.addEventListeners();
@@ -181,14 +188,14 @@ namespace IcecreamShop {
         hndlformular();
         let button1 = document.querySelector("#but2");
         button1.addEventListener("click", () => {
-            handleload(); console.log("clear Offer");
-          this.saveData();
+          clicked = true; 
+          handleload(); console.log("clear Offer");
+          saveData();
           let wrapper = document.querySelector("#wrapper");
           wrapper.classList.add("hidden");
           crc2.clearRect(0, 0, canvas.width, canvas.height);
                 }); }
 
-    
-      
+
 
 }

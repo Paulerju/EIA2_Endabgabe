@@ -36,16 +36,16 @@ namespace IcecreamShop {
             crc2.fill();
           
             //Eventlistener for customer
-            const circleRadius = this.radius;
-            const circleCenterX = this.x;
-            const circleCenterY = this.y;
+            let circleRadius = this.radius;
+            let circleCenterX = this.x;
+            let circleCenterY = this.y;
           
             crc2.canvas.addEventListener("click", (event) => {
-              const canvasRect = crc2.canvas.getBoundingClientRect();
-              const clickX = event.clientX - canvasRect.left;
-              const clickY = event.clientY - canvasRect.top;
+              let canvasRect = crc2.canvas.getBoundingClientRect();
+              let clickX = event.clientX - canvasRect.left;
+              let clickY = event.clientY - canvasRect.top;
           
-              const distanceToCenter = Math.sqrt(
+              let distanceToCenter = Math.sqrt(
                 (clickX - circleCenterX) ** 2 + (clickY - circleCenterY) ** 2
               );
           
@@ -55,29 +55,28 @@ namespace IcecreamShop {
           }
 
           followPath(): void {
-            const path: Vector[] = [
+            let path: Vector[] = [
               new Vector(this.x, this.y),
               new Vector(1230, 80)
             ];
           
             let currentPathIndex = 0;
           
-            const animateStep = () => {
+            let animateStep = () => {
               if (currentPathIndex >= path.length) {
-                console.log("Destination reached");
-                return; 
+                 this.drawBubble();
               } 
           
-              const targetPosition = path[currentPathIndex];
-              const distanceX = targetPosition.x - this.position.x;
-              const distanceY = targetPosition.y - this.position.y;
-              const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+              let targetPosition = path[currentPathIndex];
+              let distanceX = targetPosition.x - this.position.x;
+              let distanceY = targetPosition.y - this.position.y;
+              let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
           
               if (distance > this.speed) {
-                const directionX = distanceX / distance;
-                const directionY = distanceY / distance;
-                const velocityX = directionX * this.speed;
-                const velocityY = directionY * this.speed;
+                let directionX = distanceX / distance;
+                let directionY = distanceY / distance;
+                let velocityX = directionX * this.speed;
+                let velocityY = directionY * this.speed;
                 this.position.x += velocityX;
                 this.position.y += velocityY;
               } else {
@@ -101,26 +100,26 @@ namespace IcecreamShop {
           }
           
           followPath2(): void {
-            const path: Vector[] = [
+            let path: Vector[] = [
               new Vector(this.x, this.y),
               new Vector(100, 100),
             ];
           
             let currentPathIndex = 0;
           
-            const animateStep = () => {
+            let animateStep = () => {
+        
+              let currentPosition = path[currentPathIndex];
+              let nextPosition = path[currentPathIndex + 1];
+              let distance = nextPosition.subtract(currentPosition);
               if (currentPathIndex >= path.length - 1) {
-                // Customer has reached the final destination
-                return;
+                
               }
-          
-              const currentPosition = path[currentPathIndex];
-              const nextPosition = path[currentPathIndex + 1];
-              const distance = nextPosition.subtract(currentPosition);
-          
+
+
               if (distance.magnitude() > this.speed) {
-                const direction = distance.normalize();
-                const velocity = direction.scale(this.speed);
+                let direction = distance.normalize();
+                let velocity = direction.scale(this.speed);
                 this.position = currentPosition.add(velocity);
               } else {
                 // Move to the next point in the path
@@ -189,6 +188,43 @@ namespace IcecreamShop {
     total: number = 0; 
     updateTotalPrice(newTotal: number): void{
       this.total = newTotal; 
+    }
+
+    drawBubble(){
+      crc2.beginPath();
+      crc2.fillStyle = "#f5f5f5"; 
+      crc2.arc(this.position.x + 70, this.position.y - 40, 30, 0, 2 * Math.PI);
+      crc2.fill();
+      crc2.closePath();
+
+     
+
+      crc2.beginPath();
+      crc2.fillStyle = "#80112a";
+      crc2.arc(this.position.x + 70, this.position.y - 56, 8, 0, 2 * Math.PI);
+      crc2.fill();
+      crc2.closePath();
+      crc2.beginPath();
+      crc2.fillStyle = "#991433";
+      crc2.arc(this.position.x + 63, this.position.y -48, 8, 0, 2 * Math.PI);
+      crc2.arc(this.position.x +77, this.position.y -48, 8, 0, 2 * Math.PI);
+      crc2.fill();
+      crc2.closePath();
+
+      crc2.beginPath();
+      crc2.fillStyle = "#b0edff";
+      crc2.arc(this.position.x + 70, this.position.y -19, 6, 1 * Math.PI, 2 * Math.PI);
+      crc2.fill();
+      crc2.closePath();
+      crc2.beginPath();
+      crc2.arc(this.position.x + 70, this.position.y - 45, 15, 0, 1 * Math.PI);
+      crc2.fill();
+      crc2.closePath();
+      crc2.beginPath();
+      crc2.arc(this.position.x + 70, this.position.y -28, 4, 0, 2 * Math.PI);
+      crc2.fill();
+      crc2.closePath();
+
     }
 
     }

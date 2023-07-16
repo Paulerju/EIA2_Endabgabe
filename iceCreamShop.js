@@ -11,17 +11,22 @@ var IcecreamShop;
     let Seat2 = new IcecreamShop.Seat(1060, 600, 32); //right bottom
     let Seat3 = new IcecreamShop.Seat(770, 700, 32); // bottom left 
     let Seat4 = new IcecreamShop.Seat(770, 320, 32); // top left
+    let intervalId;
+    let clicked = false;
     function handleload() {
         drawBackground();
         IcecreamShop.player.drawServeri();
         IcecreamShop.newC.drawCustomer();
-        /* setInterval(() => {
-              player.update();
-              //newC.followPath();
-              drawBackground();
-              player.drawServeri();
-              newC.drawCustomer();
-          }, 1000 / 25); */
+        intervalId = setInterval(() => {
+            IcecreamShop.player.update();
+            drawBackground();
+            IcecreamShop.player.drawServeri();
+            IcecreamShop.newC.drawCustomer();
+            if (clicked) {
+                // Add your new function to the interval here
+                IcecreamShop.newC.drawBubble();
+            }
+        }, 1000 / 25);
         handleOffer();
         IcecreamShop.newOffer.addEventListeners();
         // Add event listeners walking player
@@ -154,9 +159,10 @@ var IcecreamShop;
         IcecreamShop.hndlformular();
         let button1 = document.querySelector("#but2");
         button1.addEventListener("click", () => {
+            clicked = true;
             handleload();
             console.log("clear Offer");
-            this.saveData();
+            saveData();
             let wrapper = document.querySelector("#wrapper");
             wrapper.classList.add("hidden");
             IcecreamShop.crc2.clearRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
