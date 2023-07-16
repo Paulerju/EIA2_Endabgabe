@@ -14,6 +14,7 @@ var IcecreamShop;
     let intervalId;
     let clicked = false;
     let clickedCust = false;
+    let foodhold = false;
     function handleload() {
         drawBackground();
         IcecreamShop.player.drawServeri();
@@ -27,6 +28,9 @@ var IcecreamShop;
             if (clickedCust) {
                 // Add your new function to the interval here
                 IcecreamShop.newOffer.drawOffer();
+            }
+            if (foodhold) {
+                IcecreamShop.player.drawIce();
             }
             if (clicked) {
                 // Add your new function to the interval here
@@ -188,6 +192,15 @@ var IcecreamShop;
             if (distanceToCenter <= circleRadius) {
                 clickedCust = true;
                 return clickedCust;
+            }
+        });
+        IcecreamShop.crc2.canvas.addEventListener("click", (event) => {
+            const rect = IcecreamShop.canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            if (x >= 80 && x <= 355 && y >= 590 && y <= 650) {
+                foodhold = true;
+                IcecreamShop.player.drawIce();
             }
         });
     }

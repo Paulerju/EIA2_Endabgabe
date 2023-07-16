@@ -72,6 +72,18 @@ var IcecreamShop;
             }
             console.log(this.velocity);
         }
+        drawIce() {
+            IcecreamShop.crc2.fillStyle = "#d4d4d4";
+            IcecreamShop.crc2.beginPath();
+            IcecreamShop.crc2.arc(this.position.x + 85, this.position.y - 3 + 5, 35, Math.PI, 2 * Math.PI);
+            IcecreamShop.crc2.fill();
+            IcecreamShop.crc2.closePath();
+            IcecreamShop.crc2.beginPath();
+            IcecreamShop.crc2.fillStyle = "#c2c1c0";
+            IcecreamShop.crc2.arc(this.position.x + 85, this.position.y - 40 + 5, 5, 0, 2 * Math.PI);
+            IcecreamShop.crc2.fill();
+            IcecreamShop.crc2.closePath();
+        }
     }
     IcecreamShop.Serveri = Serveri;
 })(IcecreamShop || (IcecreamShop = {}));

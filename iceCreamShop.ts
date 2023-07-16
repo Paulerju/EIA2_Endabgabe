@@ -17,12 +17,14 @@ namespace IcecreamShop {
     let intervalId: number;
     let clicked: boolean = false;
     let clickedCust: boolean = false;
+    let foodhold: boolean = false;
   
     export function handleload(): void {
       drawBackground();
       player.drawServeri();
       newC.drawCustomer();
       customerClicked();
+     
   
       intervalId = setInterval(() => {
         player.update();
@@ -34,6 +36,10 @@ namespace IcecreamShop {
           // Add your new function to the interval here
           newOffer.drawOffer();
        }
+
+       if (foodhold) {
+        player.drawIce();
+     }
   
         if (clicked) {
           // Add your new function to the interval here
@@ -222,6 +228,17 @@ namespace IcecreamShop {
                 clickedCust = true; 
                 return clickedCust; }
             }); 
+
+           crc2.canvas.addEventListener("click", (event) => {
+              const rect = canvas.getBoundingClientRect();
+              const x = event.clientX - rect.left;
+              const y = event.clientY - rect.top;
+            
+              if (x >= 80 && x <= 355 && y >= 590 && y <= 650) {
+                foodhold = true; 
+                player.drawIce();
+              }
+            });
 }
 
 }
