@@ -21,7 +21,7 @@ namespace IcecreamShop {
             this.x = x;
             this.y = y;
             this.color = color;
-            this.position = new Vector(x, y); this.total
+            this.position = new Vector(x, y);
             this.speed = speed;
             this.radius = radius; 
            

@@ -342,6 +342,7 @@ namespace IcecreamShop {
 
       let totalPriceElement = document.querySelector("#newp");
       totalPriceElement.textContent = "Price: " + this.total.toString()+ "$";
+      newC.updateTotalPrice();
       return this.total; 
     }
 

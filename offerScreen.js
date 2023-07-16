@@ -299,6 +299,7 @@ var IcecreamShop;
             this.total = this.prices[selectedFlavor] * selectedNumberI + this.prices[selectedSauce] + this.prices[selectedTopping];
             let totalPriceElement = document.querySelector("#newp");
             totalPriceElement.textContent = "Price: " + this.total.toString() + "$";
+            IcecreamShop.newC.updateTotalPrice();
             return this.total;
         }
     }

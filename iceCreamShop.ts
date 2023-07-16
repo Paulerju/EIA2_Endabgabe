@@ -13,7 +13,7 @@ namespace IcecreamShop {
   let Seat2: Seat = new Seat(1060, 600, 32); //right bottom
   let Seat3: Seat = new Seat(770, 700, 32); // bottom left 
   let Seat4: Seat = new Seat(770, 320, 32); // top left
-  let counter: number ; 
+  let counter: number = 0 ; 
 
 
   let intervalId: number;
@@ -46,9 +46,7 @@ namespace IcecreamShop {
 
       if (finished) { //customer payed
         newC.finished  = false;
-        newC.followPath2();
-        counter = counter + newC.total; 
-        moneyCount.innerHTML = counter.toString(); 
+        newC.followPath2(); 
       }
 
       if (newC.finished) { //customer finished eating
@@ -307,7 +305,8 @@ namespace IcecreamShop {
         newC.eat();
       } else {
         finished = true; 
-        //Money goes up
+        counter = counter + newC.total; console.log(counter);
+        moneyCount.innerHTML = counter.toString();
       }
     }
   });

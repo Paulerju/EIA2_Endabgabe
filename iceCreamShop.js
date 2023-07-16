@@ -12,7 +12,7 @@ var IcecreamShop;
     let Seat2 = new IcecreamShop.Seat(1060, 600, 32); //right bottom
     let Seat3 = new IcecreamShop.Seat(770, 700, 32); // bottom left 
     let Seat4 = new IcecreamShop.Seat(770, 320, 32); // top left
-    let counter;
+    let counter = 0;
     let intervalId;
     let clicked = false;
     let clickedCust = false;
@@ -39,8 +39,6 @@ var IcecreamShop;
             if (finished) { //customer payed
                 IcecreamShop.newC.finished = false;
                 IcecreamShop.newC.followPath2();
-                counter = counter + IcecreamShop.newC.total;
-                moneyCount.innerHTML = counter.toString();
             }
             if (IcecreamShop.newC.finished) { //customer finished eating
                 giveFood = false;
@@ -261,7 +259,9 @@ var IcecreamShop;
             }
             else {
                 finished = true;
-                //Money goes up
+                counter = counter + IcecreamShop.newC.total;
+                console.log(counter);
+                moneyCount.innerHTML = counter.toString();
             }
         }
     });

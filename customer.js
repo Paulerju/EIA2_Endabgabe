@@ -20,7 +20,6 @@ var IcecreamShop;
             this.y = y;
             this.color = color;
             this.position = new IcecreamShop.Vector(x, y);
-            this.total;
             this.speed = speed;
             this.radius = radius;
         }
