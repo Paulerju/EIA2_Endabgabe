@@ -2,14 +2,14 @@ var IcecreamShop;
 (function (IcecreamShop) {
     class offer {
         prices = {
-            strawberry: 1.5,
-            lemon: 1.5,
-            raspberry: 1.5,
+            strawberry: 2,
+            lemon: 2,
+            raspberry: 2,
             chocolate: 1,
             white_chocolate: 1,
             nothing: 0,
-            sprinkles: 0.50,
-            smarties: 0.50,
+            sprinkles: 1,
+            smarties: 1,
         };
         total = 0;
         drawOffer() {
@@ -19,16 +19,40 @@ var IcecreamShop;
             IcecreamShop.crc2.fillRect(390, 20, 550, 700);
             let wrapper = document.querySelector("#wrapper");
             wrapper.classList.remove("hidden");
+            this.addEventListeners();
             this.flavorchange();
             this.saucechange();
             this.toppingchange();
             console.log("draw offer");
         }
+        ;
+        addEventListeners() {
+            let flavorSelect = document.querySelector("#flavor");
+            flavorSelect.addEventListener("change", () => {
+                this.flavorchange();
+                this.calculatePrice();
+            });
+            let sauceSelect = document.querySelector("#sauce");
+            sauceSelect.addEventListener("change", () => {
+                this.saucechange();
+                this.calculatePrice();
+            });
+            let toppingSelect = document.querySelector("#toppings");
+            toppingSelect.addEventListener("change", () => {
+                this.toppingchange();
+                this.calculatePrice();
+            });
+            let numberSelect = document.querySelector("#number");
+            numberSelect.addEventListener("change", () => {
+                this.calculatePrice();
+            });
+            this.calculatePrice();
+        }
+        ;
         flavorchange() {
-            let crc2;
-            let canvas = document.querySelector("#canvas2");
-            crc2 = canvas.getContext("2d");
-            crc2.clearRect(0, 0, canvas.width, canvas.height);
+            let flavorCanvas = document.querySelector("#flavorCanvas");
+            let flavorContext = flavorCanvas.getContext("2d");
+            flavorContext.clearRect(0, 0, flavorCanvas.width, flavorCanvas.height);
             let flavorSelect = document.querySelector("#flavor");
             let selectedFlavor = flavorSelect.value;
             switch (selectedFlavor) {
@@ -49,10 +73,10 @@ var IcecreamShop;
             }
         }
         saucechange() {
-            let crc2;
-            let canvas = document.querySelector("#canvas2");
-            crc2 = canvas.getContext("2d");
-            crc2.clearRect(0, 0, canvas.width, canvas.height);
+            let flavorCanvas = document.querySelector("#flavorCanvas");
+            let flavorContext = flavorCanvas.getContext("2d");
+            flavorContext.clearRect(0, 0, flavorCanvas.width, flavorCanvas.height);
+            IcecreamShop.crc2.clearRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
             let sauceSelect = document.querySelector("#sauce");
             let selectedSauce = sauceSelect.value;
             switch (selectedSauce) {
@@ -76,28 +100,30 @@ var IcecreamShop;
             }
         }
         toppingchange() {
-            let crc2;
-            let canvas = document.querySelector("#canvas2");
-            crc2 = canvas.getContext("2d");
+            let toppingCanvas = document.querySelector("#toppingCanvas");
+            let toppingContext = toppingCanvas.getContext("2d");
+            toppingContext.clearRect(0, 0, toppingCanvas.width, toppingCanvas.height);
             let toppingSelect = document.querySelector("#toppings");
             let selectedtoppping = toppingSelect.value;
             switch (selectedtoppping) {
-                case "sprinkles":
-                    this.flavorchange();
-                    this.saucechange();
-                    this.drawsprinkles();
-                    this.bowl();
+                case "sprinkles": //Sprinkles are on timeout
+                    /*   crc2.clearRect(0, 0, canvas.width, canvas.height);
+                       this.drawsprinkles();
+                       crc2.clearRect(0, 0, canvas.width, canvas.height);*/
                     break;
                 case "smarties":
                     this.flavorchange();
                     this.saucechange();
+                    IcecreamShop.crc2.clearRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
                     this.drawsmarties();
                     this.bowl();
                     break;
                 case "nothing":
                     this.flavorchange();
                     this.saucechange();
+                    IcecreamShop.crc2.clearRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
                     this.bowl();
+                    IcecreamShop.crc2.clearRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
                     break;
                 default:
                     break;
@@ -259,30 +285,6 @@ var IcecreamShop;
             crc2.ellipse(230, 120, 8, 2, 3, 0, 20);
             crc2.fill();
         }
-        addEventListeners() {
-            let flavorSelect = document.querySelector("#flavor");
-            flavorSelect.addEventListener("change", () => {
-                this.flavorchange();
-                this.calculatePrice();
-            });
-            let sauceSelect = document.querySelector("#sauce");
-            sauceSelect.addEventListener("change", () => {
-                this.saucechange();
-                this.toppingchange();
-                this.calculatePrice();
-            });
-            let toppingSelect = document.querySelector("#toppings");
-            toppingSelect.addEventListener("change", () => {
-                this.toppingchange();
-                this.calculatePrice();
-            });
-            let numberSelect = document.querySelector("#number");
-            toppingSelect.addEventListener("change", () => {
-                this.calculatePrice();
-            });
-            this.calculatePrice();
-        }
-        ;
         calculatePrice() {
             let flavorSelect = document.querySelector("#flavor");
             let selectedFlavor = flavorSelect.value;

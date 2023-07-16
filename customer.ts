@@ -18,6 +18,7 @@ namespace IcecreamShop {
             this.radius = radius; 
            
           } 
+
       
           drawCustomer(): void {
             crc2.beginPath();
@@ -34,9 +35,11 @@ namespace IcecreamShop {
             crc2.arc(this.x - 10, this.y - 5, 7, 0, 2 * Math.PI);
             crc2.arc(this.x + 10, this.y - 5, 7, 0, 2 * Math.PI);
             crc2.fill();
+
+            
           
             //Eventlistener for customer
-            let circleRadius = this.radius;
+          /*  let circleRadius = this.radius;
             let circleCenterX = this.x;
             let circleCenterY = this.y;
           
@@ -51,7 +54,7 @@ namespace IcecreamShop {
           
               if (distanceToCenter <= circleRadius) {
                 newOffer.drawOffer();}
-            });
+            });*/
           }
 
           followPath(): void {

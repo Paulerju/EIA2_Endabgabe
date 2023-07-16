@@ -43,7 +43,6 @@ var IcecreamShop;
             this.drawServeri();
         }
         handleKeyDown(event) {
-            // Update the velocity based on the key pressed
             switch (event.key) {
                 case "w":
                     this.velocity.y = -5; // Move up
@@ -61,7 +60,6 @@ var IcecreamShop;
             console.log(this.velocity);
         }
         handleKeyUp(event) {
-            // Reset the velocity when the key is released
             switch (event.key) {
                 case "w":
                 case "s":

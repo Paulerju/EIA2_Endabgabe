@@ -52,7 +52,6 @@ namespace IcecreamShop {
     }
 
     handleKeyDown(event: KeyboardEvent): void {
-        // Update the velocity based on the key pressed
         switch (event.key) {
             case "w":
                 this.velocity.y = -5; // Move up
@@ -71,7 +70,6 @@ namespace IcecreamShop {
     }
 
     handleKeyUp(event: KeyboardEvent): void {
-        // Reset the velocity when the key is released
         switch (event.key) {
             case "w":
             case "s":

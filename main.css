@@ -121,3 +121,19 @@ right: 10px;
 padding: 20px;
 background-color: rgb(69, 142, 184)
 }
+
+#flavorCanvas{
+    position: absolute;
+    position: absolute;
+    left: 500px;;
+    top: 150px;
+
+}
+
+#toppingCanvas{
+    position: absolute;
+    position: absolute;
+    left: 500px;;
+    top: 150px;
+
+}

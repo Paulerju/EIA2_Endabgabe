@@ -16,20 +16,30 @@ namespace IcecreamShop {
 
     let intervalId: number;
     let clicked: boolean = false;
+    let clickedCust: boolean = false;
   
     export function handleload(): void {
       drawBackground();
       player.drawServeri();
       newC.drawCustomer();
+      customerClicked();
   
       intervalId = setInterval(() => {
         player.update();
         drawBackground();
         player.drawServeri();
         newC.drawCustomer();
+
+        if (clickedCust) {
+          // Add your new function to the interval here
+          newOffer.drawOffer();
+       }
   
         if (clicked) {
           // Add your new function to the interval here
+          clickedCust = false;
+          let wrapper = document.querySelector("#wrapper");
+          wrapper.classList.add("hidden");
           newC.drawBubble();
        }
       }, 1000 / 25);
@@ -191,11 +201,27 @@ namespace IcecreamShop {
           clicked = true; 
           handleload(); console.log("clear Offer");
           saveData();
-          let wrapper = document.querySelector("#wrapper");
-          wrapper.classList.add("hidden");
           crc2.clearRect(0, 0, canvas.width, canvas.height);
+
                 }); }
 
-
+           function customerClicked(){
+            let circleRadius = newC.radius;
+            let circleCenterX = newC.x;
+            let circleCenterY = newC.y;
+          
+            crc2.canvas.addEventListener("click", (event) => {
+              let canvasRect = crc2.canvas.getBoundingClientRect();
+              let clickX = event.clientX - canvasRect.left;
+              let clickY = event.clientY - canvasRect.top;
+          
+              let distanceToCenter = Math.sqrt(
+                (clickX - circleCenterX) ** 2 + (clickY - circleCenterY) ** 2
+              );
+              if (distanceToCenter <= circleRadius) {
+                clickedCust = true; 
+                return clickedCust; }
+            }); 
+}
 
 }

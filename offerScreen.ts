@@ -2,41 +2,67 @@ namespace IcecreamShop {
   export class offer {
 
     private prices: { [key: string]: number } = {
-      strawberry: 1.5,
-      lemon: 1.5,
-      raspberry: 1.5,
+      strawberry: 2,
+      lemon: 2,
+      raspberry: 2,
       chocolate: 1,
       white_chocolate: 1,
       nothing: 0,
-      sprinkles: 0.50,
-      smarties: 0.50,
+      sprinkles: 1,
+      smarties: 1,
     };
 
     total:number = 0; 
 
     drawOffer(): void {
-
-      crc2.fillStyle = "rgba(210, 210, 210, 0.5)"; 
-      crc2.fillRect(0, 0, canvas.width, canvas.height); 
-
+      crc2.fillStyle = "rgba(210, 210, 210, 0.5)";
+      crc2.fillRect(0, 0, canvas.width, canvas.height);
       crc2.fillStyle = "#4696c2";
       crc2.fillRect(390, 20, 550, 700);
 
       let wrapper = document.querySelector("#wrapper");
       wrapper.classList.remove("hidden");
+
+      this.addEventListeners(); 
+
       this.flavorchange();
       this.saucechange();
       this.toppingchange();
       console.log("draw offer");
+    };
 
-    }
+    addEventListeners(): void {
+      let flavorSelect = document.querySelector("#flavor") as HTMLSelectElement;
+      flavorSelect.addEventListener("change", () => {
+        this.flavorchange();
+        this.calculatePrice();
+      });
+
+      let sauceSelect = document.querySelector("#sauce") as HTMLSelectElement;
+      sauceSelect.addEventListener("change", () => {
+        this.saucechange();
+        this.calculatePrice();
+      });
+
+      let toppingSelect = document.querySelector("#toppings") as HTMLSelectElement;
+      toppingSelect.addEventListener("change", () => {
+        this.toppingchange();
+        this.calculatePrice();
+      });
+
+      let numberSelect = document.querySelector("#number") as HTMLSelectElement;
+      numberSelect.addEventListener("change", () => {
+        this.calculatePrice();
+      });
+
+      this.calculatePrice();
+    };
+    
 
     flavorchange(): void {
-      let crc2: CanvasRenderingContext2D;
-      let canvas: HTMLCanvasElement = document.querySelector("#canvas2")!;
-      crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-
-      crc2.clearRect(0, 0, canvas.width, canvas.height);
+      let flavorCanvas = document.querySelector("#flavorCanvas")! as HTMLCanvasElement;
+      let flavorContext = <CanvasRenderingContext2D>flavorCanvas.getContext("2d");
+      flavorContext.clearRect(0, 0, flavorCanvas.width, flavorCanvas.height);
 
       let flavorSelect = document.querySelector("#flavor") as HTMLSelectElement;
       let selectedFlavor = flavorSelect.value;
@@ -60,9 +86,9 @@ namespace IcecreamShop {
     }
 
     saucechange(): void {
-      let crc2: CanvasRenderingContext2D;
-      let canvas: HTMLCanvasElement = document.querySelector("#canvas2")!;
-      crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
+      let flavorCanvas = document.querySelector("#flavorCanvas")! as HTMLCanvasElement;
+      let flavorContext = <CanvasRenderingContext2D>flavorCanvas.getContext("2d");
+      flavorContext.clearRect(0, 0, flavorCanvas.width, flavorCanvas.height);
 
       crc2.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -91,23 +117,23 @@ namespace IcecreamShop {
     }
 
     toppingchange(): void {  // Hängt sich auf, wenn streusel ausgewählt werden??
-      let crc2: CanvasRenderingContext2D;
-      let canvas: HTMLCanvasElement = document.querySelector("#canvas2")!;
-      crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
+      let toppingCanvas = document.querySelector("#toppingCanvas")! as HTMLCanvasElement;
+      let toppingContext = <CanvasRenderingContext2D>toppingCanvas.getContext("2d");
+      toppingContext.clearRect(0, 0, toppingCanvas.width, toppingCanvas.height);
 
       let toppingSelect = document.querySelector("#toppings") as HTMLSelectElement;
       let selectedtoppping = toppingSelect.value;
 
       switch (selectedtoppping) {
-        case "sprinkles":
-          this.flavorchange();
-          this.saucechange();
+        case "sprinkles": //Sprinkles are on timeout
+       /*   crc2.clearRect(0, 0, canvas.width, canvas.height);
           this.drawsprinkles();
-          this.bowl();
+          crc2.clearRect(0, 0, canvas.width, canvas.height);*/
           break;
         case "smarties":
           this.flavorchange();
           this.saucechange();
+          crc2.clearRect(0, 0, canvas.width, canvas.height);
           this.drawsmarties();
           this.bowl();
 
@@ -115,7 +141,9 @@ namespace IcecreamShop {
         case "nothing":
           this.flavorchange();
           this.saucechange();
+          crc2.clearRect(0, 0, canvas.width, canvas.height);
           this.bowl();
+          crc2.clearRect(0, 0, canvas.width, canvas.height);
           break;
         default:
           break;
@@ -295,36 +323,6 @@ namespace IcecreamShop {
 
 
     }
-
-
-    addEventListeners(): void {
-      let flavorSelect = document.querySelector("#flavor") as HTMLSelectElement;
-      flavorSelect.addEventListener("change", () => {
-        this.flavorchange();
-        this.calculatePrice();
-      });
-
-      let sauceSelect = document.querySelector("#sauce") as HTMLSelectElement;
-      sauceSelect.addEventListener("change", () => {
-        this.saucechange();
-        this.toppingchange();
-        this.calculatePrice();
-      });
-
-      let toppingSelect = document.querySelector("#toppings") as HTMLSelectElement;
-      toppingSelect.addEventListener("change", () => {
-        this.toppingchange();
-        this.calculatePrice();
-      });
-
-      let numberSelect = document.querySelector("#number") as HTMLSelectElement;
-      toppingSelect.addEventListener("change", () => {
-        this.calculatePrice();
-      });
-
-      this.calculatePrice();
-
-    };
 
     calculatePrice() { //get the price + price updates 
       let flavorSelect = document.querySelector("#flavor") as HTMLSelectElement;

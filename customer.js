@@ -31,18 +31,22 @@ var IcecreamShop;
             IcecreamShop.crc2.arc(this.x + 10, this.y - 5, 7, 0, 2 * Math.PI);
             IcecreamShop.crc2.fill();
             //Eventlistener for customer
-            let circleRadius = this.radius;
-            let circleCenterX = this.x;
-            let circleCenterY = this.y;
-            IcecreamShop.crc2.canvas.addEventListener("click", (event) => {
-                let canvasRect = IcecreamShop.crc2.canvas.getBoundingClientRect();
+            /*  let circleRadius = this.radius;
+              let circleCenterX = this.x;
+              let circleCenterY = this.y;
+            
+              crc2.canvas.addEventListener("click", (event) => {
+                let canvasRect = crc2.canvas.getBoundingClientRect();
                 let clickX = event.clientX - canvasRect.left;
                 let clickY = event.clientY - canvasRect.top;
-                let distanceToCenter = Math.sqrt((clickX - circleCenterX) ** 2 + (clickY - circleCenterY) ** 2);
+            
+                let distanceToCenter = Math.sqrt(
+                  (clickX - circleCenterX) ** 2 + (clickY - circleCenterY) ** 2
+                );
+            
                 if (distanceToCenter <= circleRadius) {
-                    IcecreamShop.newOffer.drawOffer();
-                }
-            });
+                  newOffer.drawOffer();}
+              });*/
         }
         followPath() {
             let path = [

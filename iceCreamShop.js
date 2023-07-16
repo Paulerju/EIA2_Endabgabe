@@ -13,17 +13,26 @@ var IcecreamShop;
     let Seat4 = new IcecreamShop.Seat(770, 320, 32); // top left
     let intervalId;
     let clicked = false;
+    let clickedCust = false;
     function handleload() {
         drawBackground();
         IcecreamShop.player.drawServeri();
         IcecreamShop.newC.drawCustomer();
+        customerClicked();
         intervalId = setInterval(() => {
             IcecreamShop.player.update();
             drawBackground();
             IcecreamShop.player.drawServeri();
             IcecreamShop.newC.drawCustomer();
+            if (clickedCust) {
+                // Add your new function to the interval here
+                IcecreamShop.newOffer.drawOffer();
+            }
             if (clicked) {
                 // Add your new function to the interval here
+                clickedCust = false;
+                let wrapper = document.querySelector("#wrapper");
+                wrapper.classList.add("hidden");
                 IcecreamShop.newC.drawBubble();
             }
         }, 1000 / 25);
@@ -163,11 +172,24 @@ var IcecreamShop;
             handleload();
             console.log("clear Offer");
             saveData();
-            let wrapper = document.querySelector("#wrapper");
-            wrapper.classList.add("hidden");
             IcecreamShop.crc2.clearRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
         });
     }
     IcecreamShop.handleOffer = handleOffer;
+    function customerClicked() {
+        let circleRadius = IcecreamShop.newC.radius;
+        let circleCenterX = IcecreamShop.newC.x;
+        let circleCenterY = IcecreamShop.newC.y;
+        IcecreamShop.crc2.canvas.addEventListener("click", (event) => {
+            let canvasRect = IcecreamShop.crc2.canvas.getBoundingClientRect();
+            let clickX = event.clientX - canvasRect.left;
+            let clickY = event.clientY - canvasRect.top;
+            let distanceToCenter = Math.sqrt((clickX - circleCenterX) ** 2 + (clickY - circleCenterY) ** 2);
+            if (distanceToCenter <= circleRadius) {
+                clickedCust = true;
+                return clickedCust;
+            }
+        });
+    }
 })(IcecreamShop || (IcecreamShop = {}));
 //# sourceMappingURL=iceCreamShop.js.map
