@@ -6,14 +6,12 @@ var IcecreamShop;
         color;
         radius;
         position;
-        targetSeat;
         speed;
         constructor(x, y, color, speed, radius) {
             this.x = x;
             this.y = y;
             this.color = color;
             this.position = new IcecreamShop.Vector(x, y);
-            this.targetSeat = null;
             this.speed = speed;
             this.radius = radius;
         }
@@ -46,28 +44,10 @@ var IcecreamShop;
                 }
             });
         }
-        move() {
-            if (this.targetSeat) {
-                const targetPosition = new IcecreamShop.Vector(this.targetSeat.getX(), this.targetSeat.getY());
-                const distance = new IcecreamShop.Vector(targetPosition.x - this.position.x, targetPosition.y - this.position.y);
-                if (distance.magnitude() > this.speed) {
-                    const direction = distance.normalize();
-                    const velocity = new IcecreamShop.Vector(direction.x * this.speed, direction.y * this.speed);
-                    this.position.x += velocity.x;
-                    this.position.y += velocity.y;
-                }
-                else {
-                    // Customer has reached the target seat
-                    this.targetSeat.assignCustomer(this);
-                    this.targetSeat = null;
-                }
-            }
-        }
         followPath() {
             const path = [
                 new IcecreamShop.Vector(this.x, this.y),
-                new IcecreamShop.Vector(1230, 80),
-                new IcecreamShop.Vector(800, 100)
+                new IcecreamShop.Vector(1230, 80)
             ];
             let currentPathIndex = 0;
             const animateStep = () => {

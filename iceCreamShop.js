@@ -15,13 +15,13 @@ var IcecreamShop;
         drawBackground();
         IcecreamShop.player.drawServeri();
         newC.drawCustomer();
-        /*   setInterval(() => {
-               player.update();
-               //newC.followPath();
-               drawBackground();
-               player.drawServeri();
-               newC.drawCustomer();
-           }, 1000 / 25); */
+        /* setInterval(() => {
+              player.update();
+              //newC.followPath();
+              drawBackground();
+              player.drawServeri();
+              newC.drawCustomer();
+          }, 1000 / 25); */
         handleOffer();
         IcecreamShop.newOffer.addEventListeners();
         // Add event listeners walking player

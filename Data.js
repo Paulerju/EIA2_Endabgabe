@@ -1,12 +1,12 @@
 var IcecreamShop;
 (function (IcecreamShop) {
-    let edit = document.createElement("button"); // edit button erstellen
+    let edit = document.createElement("button");
     edit.setAttribute("id", "edit");
     edit.innerHTML = "Edit";
-    let newdiv = document.createElement("div"); // div element für to do erstellen
+    let newdiv = document.createElement("div");
     newdiv.setAttribute("id", "newtask");
-    let newP = document.createElement("p"); // p element für to do erstellen
-    newP.setAttribute("id", "newp");
+    let newP = document.createElement("p");
+    newdiv.setAttribute("id", "newp");
     let divcontainer = document.querySelector("#wrapper");
     IcecreamShop.taskArray = [];
     function hndlformular() {
@@ -28,7 +28,7 @@ var IcecreamShop;
             selectedFlavor,
             selectedSauce,
             selectedTopping,
-            selectedNumber
+            selectedNumber,
         ];
         console.log("customerData: ", customerData);
         return customerData;
@@ -36,9 +36,10 @@ var IcecreamShop;
     IcecreamShop.getData = getData;
     console.log(getData);
     IcecreamShop.json = {};
-    IcecreamShop.submit = document.querySelector("#but2");
+    IcecreamShop.submit = (document.querySelector("#but2"));
+    let newDocumentId;
     async function sendTask(_event) {
-        let formData = new FormData(); // No need to use 'form' anymore
+        let formData = new FormData();
         let customerData = getData();
         formData.set("flavor", customerData[0]);
         formData.set("sauce", customerData[1]);
@@ -50,15 +51,23 @@ var IcecreamShop;
         query.set("data", JSON.stringify(Object.fromEntries(formData.entries())));
         let urlParams = query.toString();
         let url = `https://webuser.hs-furtwangen.de/~paulerju/Database/?${urlParams}`;
-        await fetch(url);
-        //  alert("Task Submitted!");
+        ("ID: " + url); //got the id here, but its not getting it in response? 
+        let response = await fetch(url);
+        ("response : " + response);
+        if (response.ok) {
+            let data = await response.json();
+            if (data.id) {
+                newDocumentId = data.id;
+                console.log;
+                console.log("Newly inserted document ID:", newDocumentId);
+            }
+        }
     }
     IcecreamShop.sendTask = sendTask;
     async function communicate(_url) {
         let response = await fetch(_url);
         let offer = await response.text();
         let gotdata = JSON.parse(offer);
-        // gotdata is empty, offer is a string, cant read the stuff out
         console.log("this" + gotdata);
         console.log("Response", response);
         console.log("before" + offer);
@@ -69,15 +78,34 @@ var IcecreamShop;
         let customerData = getData();
         document.getElementById("list").appendChild(newdiv);
         document.querySelector("#list").appendChild(newP);
-        newP.innerHTML = "flavor : " + customerData[0] + ", <br> sauce: " + customerData[1] + ", <br> toppings: " + customerData[2] + ", <br> amount: " + customerData[3];
+        newP.innerHTML =
+            "flavor : " +
+                customerData[0] +
+                ", <br> sauce: " +
+                customerData[1] +
+                ", <br> toppings: " +
+                customerData[2] +
+                ", <br> amount: " +
+                customerData[3];
         e.preventDefault();
         newP.appendChild(edit);
+        let wrapper = document.querySelector("#wrapper");
+        wrapper.classList.add("hidden");
     }
     IcecreamShop.addbtn = addbtn;
-    function editbtn() {
+    async function editbtn() {
         divcontainer.classList.remove("hidden");
         document.getElementById("list").removeChild(newdiv);
         document.querySelector("#list").removeChild(newP);
+        let query = new URLSearchParams();
+        query.set("command", "delete"); //Delete from Database not working because ID undefined
+        query.set("collection", "IceOrders");
+        query.set("id", newDocumentId);
+        let response = await fetch("https://webuser.hs-furtwangen.de/~paulerju/Database/" + "?" + query.toString());
+        if (response.ok) {
+            alert("Task deleted!");
+            console.log("DELETED");
+        }
     }
 })(IcecreamShop || (IcecreamShop = {}));
 //# sourceMappingURL=Data.js.map

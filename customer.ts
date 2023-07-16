@@ -7,7 +7,6 @@ namespace IcecreamShop {
            color: string;
            radius: number; 
            private position: Vector;
-           private targetSeat: Seat | null;
            private speed: number;
 
       
@@ -16,7 +15,6 @@ namespace IcecreamShop {
             this.y = y;
             this.color = color;
             this.position = new Vector(x, y);
-            this.targetSeat = null;
             this.speed = speed;
             this.radius = radius; 
            
@@ -56,30 +54,11 @@ namespace IcecreamShop {
                 newOffer.drawOffer();}
             });
           }
-      
-          move(): void {
-            if (this.targetSeat) {
-              const targetPosition = new Vector(this.targetSeat.getX(), this.targetSeat.getY());
-              const distance = new Vector(targetPosition.x - this.position.x, targetPosition.y - this.position.y);
-          
-              if (distance.magnitude() > this.speed) {
-                const direction = distance.normalize();
-                const velocity = new Vector(direction.x * this.speed, direction.y * this.speed);
-                this.position.x += velocity.x;
-                this.position.y += velocity.y;
-              } else {
-                // Customer has reached the target seat
-                this.targetSeat.assignCustomer(this);
-                this.targetSeat = null;
-              }
-            }
-          }  
 
           followPath(): void {
             const path: Vector[] = [
               new Vector(this.x, this.y),
-              new Vector(1230, 80),
-              new Vector(800, 100)
+              new Vector(1230, 80)
             ];
           
             let currentPathIndex = 0;

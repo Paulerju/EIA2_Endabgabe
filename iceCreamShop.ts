@@ -19,7 +19,7 @@ namespace IcecreamShop {
         player.drawServeri();
          newC.drawCustomer();
          
-     /*   setInterval(() => {
+      /* setInterval(() => {
             player.update();
             //newC.followPath(); 
             drawBackground(); 
@@ -32,8 +32,6 @@ namespace IcecreamShop {
         // Add event listeners walking player
        window.addEventListener("keydown", player.handleKeyDown.bind(player));
        window.addEventListener("keyup", player.handleKeyUp.bind(player));
-
-      
     }
 
   export function drawBackground(): void {

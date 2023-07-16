@@ -1,6 +1,16 @@
 var IcecreamShop;
 (function (IcecreamShop) {
     class offer {
+        prices = {
+            strawberry: 1.5,
+            lemon: 1.5,
+            raspberry: 1.5,
+            chocolate: 1,
+            white_chocolate: 1,
+            nothing: 0,
+            sprinkles: 0.50,
+            smarties: 0.50,
+        };
         drawOffer() {
             IcecreamShop.crc2.fillStyle = "rgba(210, 210, 210, 0.5)";
             IcecreamShop.crc2.fillRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
@@ -249,21 +259,44 @@ var IcecreamShop;
             crc2.fill();
         }
         addEventListeners() {
-            const flavorSelect = document.querySelector("#flavor");
+            let flavorSelect = document.querySelector("#flavor");
             flavorSelect.addEventListener("change", () => {
                 this.flavorchange();
+                this.calculatePrice();
             });
-            const sauceSelect = document.querySelector("#sauce");
+            let sauceSelect = document.querySelector("#sauce");
             sauceSelect.addEventListener("change", () => {
                 this.saucechange();
                 this.toppingchange();
+                this.calculatePrice();
             });
-            const toppingSelect = document.querySelector("#toppings");
+            let toppingSelect = document.querySelector("#toppings");
             toppingSelect.addEventListener("change", () => {
                 this.toppingchange();
+                this.calculatePrice();
             });
+            let numberSelect = document.querySelector("#number");
+            toppingSelect.addEventListener("change", () => {
+                this.calculatePrice();
+            });
+            this.calculatePrice();
         }
         ;
+        calculatePrice() {
+            let flavorSelect = document.querySelector("#flavor");
+            let selectedFlavor = flavorSelect.value;
+            let sauceSelect = document.querySelector("#sauce");
+            let selectedSauce = sauceSelect.value;
+            let toppingSelect = document.querySelector("#toppings");
+            let selectedTopping = toppingSelect.value;
+            let numberSelect = document.querySelector("#number");
+            let selectedNumber = numberSelect.value;
+            let selectedNumberI = parseInt(selectedNumber, 10);
+            console.log(selectedNumberI);
+            let total = this.prices[selectedFlavor] * selectedNumberI + this.prices[selectedSauce] + this.prices[selectedTopping];
+            let totalPriceElement = document.querySelector("#newp");
+            totalPriceElement.textContent = "Price: " + total.toString() + "$";
+        }
     }
     IcecreamShop.offer = offer;
 })(IcecreamShop || (IcecreamShop = {}));
