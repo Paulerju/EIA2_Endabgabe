@@ -88,7 +88,7 @@ namespace IcecreamShop {
             };
           
             // Start the animation
-            requestAnimationFrame(animateStep);
+            requestAnimationFrame(animateStep); this.updateTotalPrice
           }
           
           followPath2(): void {

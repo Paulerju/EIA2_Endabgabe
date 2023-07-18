@@ -76,6 +76,7 @@ var IcecreamShop;
             };
             // Start the animation
             requestAnimationFrame(animateStep);
+            this.updateTotalPrice;
         }
         followPath2() {
             let path = [

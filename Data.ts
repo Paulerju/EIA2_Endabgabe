@@ -16,7 +16,7 @@ namespace IcecreamShop {
 
   export function hndlformular() {
     edit.addEventListener("click", editbtn);
-    document.querySelector("#but2")!.addEventListener("click", addbtn);
+    submit.addEventListener("click", addbtn);
     submit.addEventListener("click", sendTask);
   }
 
@@ -76,8 +76,8 @@ namespace IcecreamShop {
     let url = `https://webuser.hs-furtwangen.de/~paulerju/Database/?${urlParams}`;("ID: "+url); //got the id here, but its not getting it in response? 
     let response = await fetch(url); ("response : "+response);
     
-      let totalPrice = newOffer.calculatePrice(); // total price will save in customer now 
-      newC.updateTotalPrice(totalPrice);
+    // total price save in customer
+      newC.updateTotalPrice();
 
     if (response.ok) {
       let data = await response.json();
@@ -106,15 +106,7 @@ namespace IcecreamShop {
     document.getElementById("list")!.appendChild(newdiv);
     document.querySelector("#list")!.appendChild(newP);
 
-    newP.innerHTML =
-      "flavor : " +
-      customerData[0] +
-      ", <br> sauce: " +
-      customerData[1] +
-      ", <br> toppings: " +
-      customerData[2] +
-      ", <br> amount: " +
-      customerData[3];
+    newP.innerHTML = "flavor : " + customerData[0] + ", <br> sauce: " + customerData[1] + ", <br> toppings: " + customerData[2] + ", <br> amount: " + customerData[3];
     e.preventDefault();
     newP.appendChild(edit);
     let wrapper = document.querySelector("#wrapper");
@@ -133,10 +125,6 @@ namespace IcecreamShop {
     query.set("id", newDocumentId);
     let response = await fetch(
       "https://webuser.hs-furtwangen.de/~paulerju/Database/" + "?" + query.toString()
-    );
-    if (response.ok) {
-      alert("Task deleted!");
-    }
-  }
+    );}
 
 }

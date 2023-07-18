@@ -11,7 +11,7 @@ var IcecreamShop;
     IcecreamShop.taskArray = [];
     function hndlformular() {
         edit.addEventListener("click", editbtn);
-        document.querySelector("#but2").addEventListener("click", addbtn);
+        IcecreamShop.submit.addEventListener("click", addbtn);
         IcecreamShop.submit.addEventListener("click", sendTask);
     }
     IcecreamShop.hndlformular = hndlformular;
@@ -54,8 +54,8 @@ var IcecreamShop;
         ("ID: " + url); //got the id here, but its not getting it in response? 
         let response = await fetch(url);
         ("response : " + response);
-        let totalPrice = IcecreamShop.newOffer.calculatePrice(); // total price will save in customer now 
-        IcecreamShop.newC.updateTotalPrice(totalPrice);
+        // total price save in customer
+        IcecreamShop.newC.updateTotalPrice();
         if (response.ok) {
             let data = await response.json();
             if (data.id) {
@@ -80,15 +80,7 @@ var IcecreamShop;
         let customerData = getData();
         document.getElementById("list").appendChild(newdiv);
         document.querySelector("#list").appendChild(newP);
-        newP.innerHTML =
-            "flavor : " +
-                customerData[0] +
-                ", <br> sauce: " +
-                customerData[1] +
-                ", <br> toppings: " +
-                customerData[2] +
-                ", <br> amount: " +
-                customerData[3];
+        newP.innerHTML = "flavor : " + customerData[0] + ", <br> sauce: " + customerData[1] + ", <br> toppings: " + customerData[2] + ", <br> amount: " + customerData[3];
         e.preventDefault();
         newP.appendChild(edit);
         let wrapper = document.querySelector("#wrapper");
@@ -105,9 +97,6 @@ var IcecreamShop;
         query.set("collection", "IceOrders");
         query.set("id", newDocumentId);
         let response = await fetch("https://webuser.hs-furtwangen.de/~paulerju/Database/" + "?" + query.toString());
-        if (response.ok) {
-            alert("Task deleted!");
-        }
     }
 })(IcecreamShop || (IcecreamShop = {}));
 //# sourceMappingURL=Data.js.map

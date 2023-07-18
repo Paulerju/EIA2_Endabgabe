@@ -68,10 +68,10 @@ var IcecreamShop;
         drawOutside();
         drawRestaurant();
         drawTable();
-        Seat1.drawSeat();
-        Seat2.drawSeat();
-        Seat3.drawSeat();
-        Seat4.drawSeat();
+        Seat1.drawSeats();
+        Seat2.drawSeats();
+        Seat3.drawSeats();
+        Seat4.drawSeats();
     }
     IcecreamShop.drawBackground = drawBackground;
     function drawOutside() {
@@ -238,9 +238,9 @@ var IcecreamShop;
             }
         });
         IcecreamShop.crc2.canvas.addEventListener("click", (event) => {
-            const rect = IcecreamShop.canvas.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
+            let rect = IcecreamShop.canvas.getBoundingClientRect();
+            let x = event.clientX - rect.left;
+            let y = event.clientY - rect.top;
             if (x >= 80 && x <= 355 && y >= 590 && y <= 650) {
                 foodhold = true;
                 IcecreamShop.player.drawIce();
@@ -248,9 +248,9 @@ var IcecreamShop;
         });
     }
     IcecreamShop.crc2.canvas.addEventListener("click", (event) => {
-        const rect = IcecreamShop.canvas.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+        let rect = IcecreamShop.canvas.getBoundingClientRect();
+        let x = event.clientX - rect.left;
+        let y = event.clientY - rect.top;
         if (x >= IcecreamShop.newC.position.x + 40 && x <= IcecreamShop.newC.position.x + 100 &&
             y >= IcecreamShop.newC.position.y - 70 && y <= IcecreamShop.newC.position.y - 10 && IcecreamShop.player.carrying == true) {
             if (clicked) {
