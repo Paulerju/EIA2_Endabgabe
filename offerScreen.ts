@@ -1,5 +1,5 @@
 namespace IcecreamShop {
-  export class offer {
+  export class Offer {
 
     private prices: { [key: string]: number } = {
       strawberry: 2,

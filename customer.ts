@@ -1,13 +1,12 @@
 namespace IcecreamShop {
 
   enum CustomerState {
-    Walking,
-    Ordering,
-    Eating,
-    FinishedEating,
+    WALKING,
+    WAITING,
+    EATING
   }
 
-  export class customer {
+  export class Customer {
 
            static currentId: number = 1;
            customerId: number;
@@ -33,12 +32,12 @@ namespace IcecreamShop {
             this.position = new Vector(x, y);
             this.speed = speed;
             this.radius = radius; 
-            this.customerId = customer.currentId;
-            customer.currentId++;
+            this.customerId = Customer.currentId;
+            Customer.currentId++;
            
           } 
 
-          currentState: CustomerState = CustomerState.Walking;
+          currentState: CustomerState = CustomerState.WALKING;
       
           drawCustomer(): void {
             crc2.beginPath();
@@ -58,7 +57,7 @@ namespace IcecreamShop {
           }
 
            addNewCustomer(): void {
-            let newCustomer: customer = new customer(200, 300, "#b56cd4", 5, 40);
+            let newCustomer: Customer = new Customer(200, 300, "#b56cd4", 5, 40);
             customers.push(newCustomer);
             newCustomer.drawCustomer();
           }
@@ -93,18 +92,13 @@ namespace IcecreamShop {
                 currentPathIndex++;
               }
           
-              // Update the customer's position
               this.x = this.position.x;
               this.y = this.position.y;
-          
-              // Redraw the customer at the new position
+
               this.drawCustomer();
-          
-              // Request the next frame of animation
               requestAnimationFrame(animateStep);
             };
-          
-            // Start the animation
+
             requestAnimationFrame(animateStep); 
           }
           
@@ -182,39 +176,39 @@ namespace IcecreamShop {
             requestAnimationFrame(animateStep); 
           }
 
-          // moveToSeat(): void {
+          moveToSeat(): void {
       
-          //     if (Seat1.isOccupied()) {
-          //       this.followPathSeat(Seat1.x, Seat1.y); 
-          //       Seat1.occupied = true; 
-          //       this.drawBubble(); 
-          //       return; 
-          //     }
+              if (Seat1.isOccupied()) {
+                this.followPathSeat(Seat1.x, Seat1.y); 
+                Seat1.occupied = true; 
+                this.drawBubble(); 
+                return; 
+              }
 
-          //     if (Seat2.isOccupied()) {
-          //       this.followPathSeat(Seat2.x, Seat2.y); 
-          //       Seat2.occupied = true; 
-          //       this.drawBubble(); 
-          //       return; 
-          //     }
+              if (Seat2.isOccupied()) {
+                this.followPathSeat(Seat2.x, Seat2.y); 
+                Seat2.occupied = true; 
+                this.drawBubble(); 
+                return; 
+              }
 
-          //     if (Seat3.isOccupied()) {
-          //       this.followPathSeat(Seat3.x, Seat3.y); 
-          //       Seat3.occupied = true; 
-          //       this.drawBubble(); 
-          //       return; 
-          //     }
+              if (Seat3.isOccupied()) {
+                this.followPathSeat(Seat3.x, Seat3.y); 
+                Seat3.occupied = true; 
+                this.drawBubble(); 
+                return; 
+              }
 
-          //     if (Seat4.isOccupied()) {
-          //       this.followPathSeat(Seat4.x, Seat4.y); 
-          //       Seat4.occupied = true; 
-          //       this.drawBubble(); 
-          //       return; 
-          //     }
+              if (Seat4.isOccupied()) {
+                this.followPathSeat(Seat4.x, Seat4.y); 
+                Seat4.occupied = true; 
+                this.drawBubble(); 
+                return; 
+              }
       
-          //   // If all seats are occupied, return without taking a seat
-          //   return;
-          // }
+            // If all seats are occupied, return without taking a seat
+            return;
+          }
           
           
       
@@ -334,6 +328,12 @@ namespace IcecreamShop {
       crc2.arc(this.position.x + 83, this.position.y - 27,6,0, 2*Math.PI);
       crc2.fill();
       crc2.closePath();
+
+    }
+
+    moodUpdate(){
+
+
 
     }
 

@@ -5,11 +5,10 @@ namespace IcecreamShop {
   export let canvas: HTMLCanvasElement = document.querySelector("#shop")!;
   let moneyCount = document.querySelector("#money");
   crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-  export let player: Serveri;
-  player = new Serveri();
-  export let customers: customer[] = []; 
-  export let newC: customer = new customer(200, 300, "#b56cd4", 5, 40);
-  export let newOffer: offer = new offer();
+  export let player: Serveri = new Serveri();
+  export let customers: Customer[] = []; 
+  export let newC: Customer = new Customer(200, 300, "#b56cd4", 5, 40);
+  export let newOffer: Offer = new Offer();
   export let Seat1: Seat = new Seat(1230, 80, 32); //Top right
   export let Seat2: Seat = new Seat(1060, 600, 32); //right bottom
   export let Seat3: Seat = new Seat(770, 700, 32); // bottom left 
@@ -78,7 +77,7 @@ namespace IcecreamShop {
   }
 
   function addNewCustomer(x: number, y: number): void {
-    let newCustomer: customer = new customer(x, y, "#b56cd4", 5, 40);
+    let newCustomer: Customer = new Customer(x, y, "#b56cd4", 5, 40);
     customers.push(newCustomer);
     drawCustomers();
   }
