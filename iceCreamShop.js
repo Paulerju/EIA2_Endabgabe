@@ -6,13 +6,14 @@ var IcecreamShop;
     let moneyCount = document.querySelector("#money");
     IcecreamShop.crc2 = IcecreamShop.canvas.getContext("2d");
     IcecreamShop.player = new IcecreamShop.Serveri();
+    IcecreamShop.customers = [];
     IcecreamShop.newC = new IcecreamShop.customer(200, 300, "#b56cd4", 5, 40);
     IcecreamShop.newOffer = new IcecreamShop.offer();
-    let Seat1 = new IcecreamShop.Seat(1230, 80, 32); //Top right
-    let Seat2 = new IcecreamShop.Seat(1060, 600, 32); //right bottom
-    let Seat3 = new IcecreamShop.Seat(770, 700, 32); // bottom left 
-    let Seat4 = new IcecreamShop.Seat(770, 320, 32); // top left
-    let counter = 0;
+    IcecreamShop.Seat1 = new IcecreamShop.Seat(1230, 80, 32); //Top right
+    IcecreamShop.Seat2 = new IcecreamShop.Seat(1060, 600, 32); //right bottom
+    IcecreamShop.Seat3 = new IcecreamShop.Seat(770, 700, 32); // bottom left 
+    IcecreamShop.Seat4 = new IcecreamShop.Seat(770, 320, 32); // top left
+    IcecreamShop.counter = 0;
     let intervalId;
     let clicked = false;
     let clickedCust = false;
@@ -64,14 +65,24 @@ var IcecreamShop;
         window.addEventListener("keyup", IcecreamShop.player.handleKeyUp.bind(IcecreamShop.player));
     }
     IcecreamShop.handleload = handleload;
+    function addNewCustomer(x, y) {
+        let newCustomer = new IcecreamShop.customer(x, y, "#b56cd4", 5, 40);
+        IcecreamShop.customers.push(newCustomer);
+        drawCustomers();
+    }
+    function drawCustomers() {
+        IcecreamShop.customers.forEach((customer) => {
+            customer.drawCustomer();
+        });
+    }
     function drawBackground() {
         drawOutside();
         drawRestaurant();
         drawTable();
-        Seat1.drawSeats();
-        Seat2.drawSeats();
-        Seat3.drawSeats();
-        Seat4.drawSeats();
+        IcecreamShop.Seat1.drawSeats();
+        IcecreamShop.Seat2.drawSeats();
+        IcecreamShop.Seat3.drawSeats();
+        IcecreamShop.Seat4.drawSeats();
     }
     IcecreamShop.drawBackground = drawBackground;
     function drawOutside() {
@@ -259,9 +270,9 @@ var IcecreamShop;
             }
             else {
                 finished = true;
-                counter = counter + IcecreamShop.newC.total;
-                console.log(counter);
-                moneyCount.innerHTML = counter.toString();
+                IcecreamShop.counter = IcecreamShop.counter + IcecreamShop.newC.total;
+                console.log(IcecreamShop.counter);
+                moneyCount.innerHTML = IcecreamShop.counter.toString() + "$";
             }
         }
     });

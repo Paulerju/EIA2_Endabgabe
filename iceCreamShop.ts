@@ -7,13 +7,14 @@ namespace IcecreamShop {
   crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
   export let player: Serveri;
   player = new Serveri();
+  export let customers: customer[] = []; 
   export let newC: customer = new customer(200, 300, "#b56cd4", 5, 40);
   export let newOffer: offer = new offer();
-  let Seat1: Seat = new Seat(1230, 80, 32); //Top right
-  let Seat2: Seat = new Seat(1060, 600, 32); //right bottom
-  let Seat3: Seat = new Seat(770, 700, 32); // bottom left 
-  let Seat4: Seat = new Seat(770, 320, 32); // top left
-  let counter: number = 0 ; 
+  export let Seat1: Seat = new Seat(1230, 80, 32); //Top right
+  export let Seat2: Seat = new Seat(1060, 600, 32); //right bottom
+  export let Seat3: Seat = new Seat(770, 700, 32); // bottom left 
+  export let Seat4: Seat = new Seat(770, 320, 32); // top left
+  export let counter: number = 0 ; 
 
 
   let intervalId: number;
@@ -74,6 +75,17 @@ namespace IcecreamShop {
     // Add event listeners walking player
     window.addEventListener("keydown", player.handleKeyDown.bind(player));
     window.addEventListener("keyup", player.handleKeyUp.bind(player));
+  }
+
+  function addNewCustomer(x: number, y: number): void {
+    let newCustomer: customer = new customer(x, y, "#b56cd4", 5, 40);
+    customers.push(newCustomer);
+    drawCustomers();
+  }
+  function drawCustomers(): void {
+    customers.forEach((customer) => {
+      customer.drawCustomer();
+    });
   }
 
   export function drawBackground(): void {
@@ -306,7 +318,7 @@ namespace IcecreamShop {
       } else {
         finished = true; 
         counter = counter + newC.total; console.log(counter);
-        moneyCount.innerHTML = counter.toString();
+        moneyCount.innerHTML = counter.toString()+ "$";
       }
     }
   });

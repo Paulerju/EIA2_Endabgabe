@@ -13,18 +13,20 @@ namespace IcecreamShop{
           this.occupied = false;
         }
     
-          drawSeats(): void {
-          crc2.beginPath();
-          crc2.fillStyle = this.occupied ? "#ff0000" : "#4696c2";
-          crc2.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-          crc2.fill();
-          crc2.closePath();
-        }
-    
-        Occupied(): boolean {
-          return this.occupied;
-        }
-    
+       
+    drawSeats(): void {
+      crc2.beginPath();
+      crc2.fillStyle = "#4696c2";
+      crc2.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+      crc2.fill();
+      crc2.closePath();
+    }
+
+    isOccupied(): boolean {
+      return this.occupied;
+    }
+  
+
     }
 
 

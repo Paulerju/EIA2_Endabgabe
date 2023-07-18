@@ -13,12 +13,12 @@ var IcecreamShop;
         }
         drawSeats() {
             IcecreamShop.crc2.beginPath();
-            IcecreamShop.crc2.fillStyle = this.occupied ? "#ff0000" : "#4696c2";
+            IcecreamShop.crc2.fillStyle = "#4696c2";
             IcecreamShop.crc2.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
             IcecreamShop.crc2.fill();
             IcecreamShop.crc2.closePath();
         }
-        Occupied() {
+        isOccupied() {
             return this.occupied;
         }
     }

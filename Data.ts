@@ -17,7 +17,7 @@ namespace IcecreamShop {
   export function hndlformular() {
     edit.addEventListener("click", editbtn);
     submit.addEventListener("click", addbtn);
-    submit.addEventListener("click", sendTask);
+    submit.addEventListener("click", sendTask); 
   }
 
   export function getData(): string[] {
@@ -77,7 +77,7 @@ namespace IcecreamShop {
     let response = await fetch(url); ("response : "+response);
     
     // total price save in customer
-      newC.updateTotalPrice();
+    newC.updateTotalPrice();
 
     if (response.ok) {
       let data = await response.json();
@@ -87,7 +87,7 @@ namespace IcecreamShop {
       }
 
     }
-  }
+  } 
 
   export async function communicate(_url: RequestInfo): Promise<void> {
     let response: Response = await fetch(_url);
@@ -111,10 +111,10 @@ namespace IcecreamShop {
     newP.appendChild(edit);
     let wrapper = document.querySelector("#wrapper");
     wrapper.classList.add("hidden");
-    newC.followPath(); 
+    newC.followPath();
   }
 
-  async function editbtn() {
+  async function editbtn() { 
     divcontainer.classList.remove("hidden");
     document.getElementById("list")!.removeChild(newdiv);
     document.querySelector("#list")!.removeChild(newP);

@@ -9,13 +9,22 @@ namespace IcecreamShop {
 
   export class customer {
 
+           static currentId: number = 1;
+           customerId: number;
            x: number;
            y: number; 
            color: string;
            radius: number; 
            position: Vector;
-           private speed: number;
+           private speed: number; 
            total: number = 0; 
+
+            clicked: boolean = false;
+            clickedCust: boolean = false;
+            foodhold: boolean = false;
+            giveFood: boolean = false; 
+            finished: boolean = false; 
+           
       
           constructor(x: number, y: number, color: string, speed: number, radius: number) {
             this.x = x;
@@ -24,6 +33,8 @@ namespace IcecreamShop {
             this.position = new Vector(x, y);
             this.speed = speed;
             this.radius = radius; 
+            this.customerId = customer.currentId;
+            customer.currentId++;
            
           } 
 
@@ -44,6 +55,12 @@ namespace IcecreamShop {
             crc2.arc(this.x - 10, this.y - 5, 7, 0, 2 * Math.PI);
             crc2.arc(this.x + 10, this.y - 5, 7, 0, 2 * Math.PI);
             crc2.fill();
+          }
+
+           addNewCustomer(): void {
+            let newCustomer: customer = new customer(200, 300, "#b56cd4", 5, 40);
+            customers.push(newCustomer);
+            newCustomer.drawCustomer();
           }
 
           followPath(): void {
@@ -88,7 +105,7 @@ namespace IcecreamShop {
             };
           
             // Start the animation
-            requestAnimationFrame(animateStep); this.updateTotalPrice
+            requestAnimationFrame(animateStep); 
           }
           
           followPath2(): void {
@@ -100,10 +117,7 @@ namespace IcecreamShop {
             let currentPathIndex = 0;
           
             let animateStep = () => {
-              if (currentPathIndex >= path.length) {
-                 this.drawBubble();
-              } 
-          
+                          
               let targetPosition = path[currentPathIndex];
               let distanceX = targetPosition.x - this.position.x;
               let distanceY = targetPosition.y - this.position.y;
@@ -116,32 +130,98 @@ namespace IcecreamShop {
                 let velocityY = directionY * this.speed;
                 this.position.x += velocityX;
                 this.position.y += velocityY;
-              } else {
-                // Move to the next point in the path
+              }else {
+      
                 currentPathIndex++;
-              }
-          
+              }       
               // Update the customer's position
               this.x = this.position.x;
               this.y = this.position.y;
-          
-              // Redraw the customer at the new position
               this.drawCustomer();
-          
-              // Request the next frame of animation
               requestAnimationFrame(animateStep);
             };
-          
-            // Start the animation
-            requestAnimationFrame(animateStep);
+            requestAnimationFrame(animateStep); 
           }
+
+          followPathSeat(_x:number, _y:number): void {
+            let path: Vector[] = [
+              new Vector(this.x, this.y),
+              new Vector(_x, _y)
+            ];
+          
+            let currentPathIndex = 0;
+          
+            let animateStep = () => {
+              if (this.x > 1400) {
+                let index = IcecreamShop.customers.indexOf(this);
+                if (index !== -1) {
+                  IcecreamShop.customers.splice(index, 1); // throw customer out of Array
+                }
+              }
+                          
+              let targetPosition = path[currentPathIndex];
+              let distanceX = targetPosition.x - this.position.x;
+              let distanceY = targetPosition.y - this.position.y;
+              let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+          
+              if (distance > this.speed) {
+                let directionX = distanceX / distance;
+                let directionY = distanceY / distance;
+                let velocityX = directionX * this.speed;
+                let velocityY = directionY * this.speed;
+                this.position.x += velocityX;
+                this.position.y += velocityY;
+              }           
+              // Update the customer's position
+              this.x = this.position.x;
+              this.y = this.position.y;
+
+              this.drawCustomer();
+              requestAnimationFrame(animateStep);
+            };
+            requestAnimationFrame(animateStep); 
+          }
+
+          // moveToSeat(): void {
+      
+          //     if (Seat1.isOccupied()) {
+          //       this.followPathSeat(Seat1.x, Seat1.y); 
+          //       Seat1.occupied = true; 
+          //       this.drawBubble(); 
+          //       return; 
+          //     }
+
+          //     if (Seat2.isOccupied()) {
+          //       this.followPathSeat(Seat2.x, Seat2.y); 
+          //       Seat2.occupied = true; 
+          //       this.drawBubble(); 
+          //       return; 
+          //     }
+
+          //     if (Seat3.isOccupied()) {
+          //       this.followPathSeat(Seat3.x, Seat3.y); 
+          //       Seat3.occupied = true; 
+          //       this.drawBubble(); 
+          //       return; 
+          //     }
+
+          //     if (Seat4.isOccupied()) {
+          //       this.followPathSeat(Seat4.x, Seat4.y); 
+          //       Seat4.occupied = true; 
+          //       this.drawBubble(); 
+          //       return; 
+          //     }
+      
+          //   // If all seats are occupied, return without taking a seat
+          //   return;
+          // }
           
           
       
        
     nutral(){
 
-        crc2.beginPath();
+        crc2.beginPath(); this.updateTotalPrice
         crc2.fillStyle = "#9854ba"; 
         crc2.arc(200, 300, 35, 0, 2 * Math.PI);       
         crc2.fill();
@@ -216,8 +296,6 @@ namespace IcecreamShop {
       crc2.closePath();
 
     }
-
-    finished: boolean = false; 
 
     eat(){
       crc2.beginPath();
