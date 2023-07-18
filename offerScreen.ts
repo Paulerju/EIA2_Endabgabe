@@ -95,20 +95,20 @@ namespace IcecreamShop {
       let sauceSelect = document.querySelector("#sauce") as HTMLSelectElement;
       let selectedSauce = sauceSelect.value;
 
-      switch (selectedSauce) {
+      switch (selectedSauce) {// Draw the sauce
         case "chocolate":
           this.flavorchange();
-          this.drawsauce("#1f0006"); // Draw the sauce
+          this.drawsauce("#1f0006"); 
           this.bowl();
           break;
         case "strawberry":
           this.flavorchange();
-          this.drawsauce("#701225"); // Draw the sauce
+          this.drawsauce("#701225"); 
           this.bowl();
           break;
         case "white chocolate":
           this.flavorchange();
-          this.drawsauce("#fff0d9"); // Draw the sauce
+          this.drawsauce("#fff0d9"); 
           this.bowl();
           break;
         default:

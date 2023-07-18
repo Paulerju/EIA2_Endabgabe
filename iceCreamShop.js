@@ -7,8 +7,8 @@ var IcecreamShop;
     IcecreamShop.crc2 = IcecreamShop.canvas.getContext("2d");
     IcecreamShop.player = new IcecreamShop.Serveri();
     IcecreamShop.customers = [];
-    IcecreamShop.newC = new IcecreamShop.customer(200, 300, "#b56cd4", 5, 40);
-    IcecreamShop.newOffer = new IcecreamShop.offer();
+    IcecreamShop.newC = new IcecreamShop.Customer(200, 300, "#b56cd4", 5, 40);
+    IcecreamShop.newOffer = new IcecreamShop.Offer();
     IcecreamShop.Seat1 = new IcecreamShop.Seat(1230, 80, 32); //Top right
     IcecreamShop.Seat2 = new IcecreamShop.Seat(1060, 600, 32); //right bottom
     IcecreamShop.Seat3 = new IcecreamShop.Seat(770, 700, 32); // bottom left 
@@ -60,13 +60,12 @@ var IcecreamShop;
         }, 1000 / 25);
         handleOffer();
         IcecreamShop.newOffer.addEventListeners();
-        // Add event listeners walking player
         window.addEventListener("keydown", IcecreamShop.player.handleKeyDown.bind(IcecreamShop.player));
         window.addEventListener("keyup", IcecreamShop.player.handleKeyUp.bind(IcecreamShop.player));
     }
     IcecreamShop.handleload = handleload;
     function addNewCustomer(x, y) {
-        let newCustomer = new IcecreamShop.customer(x, y, "#b56cd4", 5, 40);
+        let newCustomer = new IcecreamShop.Customer(x, y, "#b56cd4", 5, 40);
         IcecreamShop.customers.push(newCustomer);
         drawCustomers();
     }

@@ -5,10 +5,8 @@ var IcecreamShop;
         velocity;
         carrying = false;
         constructor() {
-            // Set initial position and velocity
             this.position = new IcecreamShop.Vector(430, 710);
             this.velocity = new IcecreamShop.Vector(0, 0);
-            // Add event listeners for key presses
             document.addEventListener("keydown", this.handleKeyDown.bind(this));
             document.addEventListener("keyup", this.handleKeyUp.bind(this));
         }

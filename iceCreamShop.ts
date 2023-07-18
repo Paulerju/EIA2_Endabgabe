@@ -71,7 +71,6 @@ namespace IcecreamShop {
 
     handleOffer();
     newOffer.addEventListeners();
-    // Add event listeners walking player
     window.addEventListener("keydown", player.handleKeyDown.bind(player));
     window.addEventListener("keyup", player.handleKeyUp.bind(player));
   }
@@ -277,7 +276,7 @@ namespace IcecreamShop {
     let circleCenterX = newC.x;
     let circleCenterY = newC.y;
 
-    crc2.canvas.addEventListener("click", (event) => {
+    crc2.canvas.addEventListener("click", (event) => { //Event listener customer
       let canvasRect = crc2.canvas.getBoundingClientRect();
       let clickX = event.clientX - canvasRect.left;
       let clickY = event.clientY - canvasRect.top;

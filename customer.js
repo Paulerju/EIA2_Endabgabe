@@ -2,12 +2,11 @@ var IcecreamShop;
 (function (IcecreamShop) {
     let CustomerState;
     (function (CustomerState) {
-        CustomerState[CustomerState["Walking"] = 0] = "Walking";
-        CustomerState[CustomerState["Ordering"] = 1] = "Ordering";
-        CustomerState[CustomerState["Eating"] = 2] = "Eating";
-        CustomerState[CustomerState["FinishedEating"] = 3] = "FinishedEating";
+        CustomerState[CustomerState["WALKING"] = 0] = "WALKING";
+        CustomerState[CustomerState["WAITING"] = 1] = "WAITING";
+        CustomerState[CustomerState["EATING"] = 2] = "EATING";
     })(CustomerState || (CustomerState = {}));
-    class customer {
+    class Customer {
         static currentId = 1;
         customerId;
         x;
@@ -29,10 +28,10 @@ var IcecreamShop;
             this.position = new IcecreamShop.Vector(x, y);
             this.speed = speed;
             this.radius = radius;
-            this.customerId = customer.currentId;
-            customer.currentId++;
+            this.customerId = Customer.currentId;
+            Customer.currentId++;
         }
-        currentState = CustomerState.Walking;
+        currentState = CustomerState.WALKING;
         drawCustomer() {
             IcecreamShop.crc2.beginPath();
             IcecreamShop.crc2.fillStyle = this.color;
@@ -50,7 +49,7 @@ var IcecreamShop;
             IcecreamShop.crc2.fill();
         }
         addNewCustomer() {
-            let newCustomer = new customer(200, 300, "#b56cd4", 5, 40);
+            let newCustomer = new Customer(200, 300, "#b56cd4", 5, 40);
             IcecreamShop.customers.push(newCustomer);
             newCustomer.drawCustomer();
         }
@@ -80,15 +79,11 @@ var IcecreamShop;
                     // Move to the next point in the path
                     currentPathIndex++;
                 }
-                // Update the customer's position
                 this.x = this.position.x;
                 this.y = this.position.y;
-                // Redraw the customer at the new position
                 this.drawCustomer();
-                // Request the next frame of animation
                 requestAnimationFrame(animateStep);
             };
-            // Start the animation
             requestAnimationFrame(animateStep);
         }
         followPath2() {
@@ -113,7 +108,6 @@ var IcecreamShop;
                 else {
                     currentPathIndex++;
                 }
-                // Update the customer's position
                 this.x = this.position.x;
                 this.y = this.position.y;
                 this.drawCustomer();
@@ -146,7 +140,6 @@ var IcecreamShop;
                     this.position.x += velocityX;
                     this.position.y += velocityY;
                 }
-                // Update the customer's position
                 this.x = this.position.x;
                 this.y = this.position.y;
                 this.drawCustomer();
@@ -154,34 +147,34 @@ var IcecreamShop;
             };
             requestAnimationFrame(animateStep);
         }
-        // moveToSeat(): void {
-        //     if (Seat1.isOccupied()) {
-        //       this.followPathSeat(Seat1.x, Seat1.y); 
-        //       Seat1.occupied = true; 
-        //       this.drawBubble(); 
-        //       return; 
-        //     }
-        //     if (Seat2.isOccupied()) {
-        //       this.followPathSeat(Seat2.x, Seat2.y); 
-        //       Seat2.occupied = true; 
-        //       this.drawBubble(); 
-        //       return; 
-        //     }
-        //     if (Seat3.isOccupied()) {
-        //       this.followPathSeat(Seat3.x, Seat3.y); 
-        //       Seat3.occupied = true; 
-        //       this.drawBubble(); 
-        //       return; 
-        //     }
-        //     if (Seat4.isOccupied()) {
-        //       this.followPathSeat(Seat4.x, Seat4.y); 
-        //       Seat4.occupied = true; 
-        //       this.drawBubble(); 
-        //       return; 
-        //     }
-        //   // If all seats are occupied, return without taking a seat
-        //   return;
-        // }
+        moveToSeat() {
+            if (IcecreamShop.Seat1.isOccupied()) {
+                this.followPathSeat(IcecreamShop.Seat1.x, IcecreamShop.Seat1.y);
+                IcecreamShop.Seat1.occupied = true;
+                this.drawBubble();
+                return;
+            }
+            if (IcecreamShop.Seat2.isOccupied()) {
+                this.followPathSeat(IcecreamShop.Seat2.x, IcecreamShop.Seat2.y);
+                IcecreamShop.Seat2.occupied = true;
+                this.drawBubble();
+                return;
+            }
+            if (IcecreamShop.Seat3.isOccupied()) {
+                this.followPathSeat(IcecreamShop.Seat3.x, IcecreamShop.Seat3.y);
+                IcecreamShop.Seat3.occupied = true;
+                this.drawBubble();
+                return;
+            }
+            if (IcecreamShop.Seat4.isOccupied()) {
+                this.followPathSeat(IcecreamShop.Seat4.x, IcecreamShop.Seat4.y);
+                IcecreamShop.Seat4.occupied = true;
+                this.drawBubble();
+                return;
+            }
+            // If all seats are occupied, return without taking a seat
+            return;
+        }
         nutral() {
             IcecreamShop.crc2.beginPath();
             this.updateTotalPrice;
@@ -283,7 +276,27 @@ var IcecreamShop;
             IcecreamShop.crc2.fill();
             IcecreamShop.crc2.closePath();
         }
+        moodUpdate() {
+            if (this.currentState !== CustomerState.WAITING) {
+                return;
+            }
+            let waitingTimer = setInterval(() => {
+            }, 1000 * 15);
+            let clickTimer1 = setTimeout(() => {
+                clearInterval(waitingTimer);
+                this.nutral(); // Draw nutral if not clicked within 15 seconds
+                let clickTimer2 = setTimeout(() => {
+                    this.unhappy(); // Draw angry if not clicked within 10 seconds
+                    this.followPath2();
+                }, 1000 * 10);
+                IcecreamShop.canvas.addEventListener('click', () => {
+                    clearTimeout(clickTimer2);
+                    this.clicked = true;
+                    this.drawCustomer();
+                });
+            }, 1000 * 15);
+        }
     }
-    IcecreamShop.customer = customer;
+    IcecreamShop.Customer = Customer;
 })(IcecreamShop || (IcecreamShop = {}));
 //# sourceMappingURL=customer.js.map

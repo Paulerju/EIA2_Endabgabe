@@ -128,7 +128,6 @@ namespace IcecreamShop {
       
                 currentPathIndex++;
               }       
-              // Update the customer's position
               this.x = this.position.x;
               this.y = this.position.y;
               this.drawCustomer();
@@ -166,7 +165,6 @@ namespace IcecreamShop {
                 this.position.x += velocityX;
                 this.position.y += velocityY;
               }           
-              // Update the customer's position
               this.x = this.position.x;
               this.y = this.position.y;
 
@@ -332,7 +330,29 @@ namespace IcecreamShop {
     }
 
     moodUpdate(){
+      if (this.currentState !== CustomerState.WAITING) {
+        return;
+      }
+  
+      let waitingTimer = setInterval(() => {
 
+      }, 1000 * 15);
+  
+      let clickTimer1 = setTimeout(() => {
+        clearInterval(waitingTimer);
+        this.nutral(); // Draw nutral if not clicked within 15 seconds
+  
+        let clickTimer2 = setTimeout(() => {
+          this.unhappy(); // Draw angry if not clicked within 10 seconds
+          this.followPath2(); 
+        }, 1000 * 10);
+  
+        canvas.addEventListener('click', () => {
+          clearTimeout(clickTimer2);
+          this.clicked = true;
+          this.drawCustomer(); 
+        });
+      }, 1000 * 15);
 
 
     }

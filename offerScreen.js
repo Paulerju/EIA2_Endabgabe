@@ -1,6 +1,6 @@
 var IcecreamShop;
 (function (IcecreamShop) {
-    class offer {
+    class Offer {
         prices = {
             strawberry: 2,
             lemon: 2,
@@ -79,20 +79,20 @@ var IcecreamShop;
             IcecreamShop.crc2.clearRect(0, 0, IcecreamShop.canvas.width, IcecreamShop.canvas.height);
             let sauceSelect = document.querySelector("#sauce");
             let selectedSauce = sauceSelect.value;
-            switch (selectedSauce) {
+            switch (selectedSauce) { // Draw the sauce
                 case "chocolate":
                     this.flavorchange();
-                    this.drawsauce("#1f0006"); // Draw the sauce
+                    this.drawsauce("#1f0006");
                     this.bowl();
                     break;
                 case "strawberry":
                     this.flavorchange();
-                    this.drawsauce("#701225"); // Draw the sauce
+                    this.drawsauce("#701225");
                     this.bowl();
                     break;
                 case "white chocolate":
                     this.flavorchange();
-                    this.drawsauce("#fff0d9"); // Draw the sauce
+                    this.drawsauce("#fff0d9");
                     this.bowl();
                     break;
                 default:
@@ -303,6 +303,6 @@ var IcecreamShop;
             return this.total;
         }
     }
-    IcecreamShop.offer = offer;
+    IcecreamShop.Offer = Offer;
 })(IcecreamShop || (IcecreamShop = {}));
 //# sourceMappingURL=offerScreen.js.map
